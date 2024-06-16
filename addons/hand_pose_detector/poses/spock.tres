@@ -1,0 +1,208 @@
+[gd_resource type="Resource" script_class="HandPose" load_steps=16 format=3 uid="uid://xghyj4mh4av2"]
+
+[ext_resource type="Script" path="res://addons/hand_pose_detector/hand_pose_rule.gd" id="1_vkfm2"]
+[ext_resource type="Script" path="res://addons/hand_pose_detector/hand_pose.gd" id="2_agcwt"]
+
+[sub_resource type="Resource" id="Resource_1aijm"]
+script = ExtResource("1_vkfm2")
+name = "Thumb Out"
+rule = 0
+finger = 0
+other_finger = 0
+range_min = -1000.0
+range_lower = -999.0
+range_upper = 50.0
+range_max = 70.0
+range_min = -1000.0
+range_lower = -999.0
+range_upper = 50.0
+range_max = 70.0
+
+[sub_resource type="Resource" id="Resource_qtb6d"]
+script = ExtResource("1_vkfm2")
+name = "Thumb Straight"
+rule = 1
+finger = 0
+other_finger = 0
+range_min = -1000.0
+range_lower = -999.0
+range_upper = 10.0
+range_max = 20.0
+range_min = -1000.0
+range_lower = -999.0
+range_upper = 10.0
+range_max = 20.0
+
+[sub_resource type="Resource" id="Resource_4dy62"]
+script = ExtResource("1_vkfm2")
+name = "Index Out"
+rule = 0
+finger = 1
+other_finger = 0
+range_min = -1000.0
+range_lower = -999.0
+range_upper = 30.0
+range_max = 40.0
+range_min = -1000.0
+range_lower = -999.0
+range_upper = 30.0
+range_max = 40.0
+
+[sub_resource type="Resource" id="Resource_e00gh"]
+script = ExtResource("1_vkfm2")
+name = "Index Straight"
+rule = 1
+finger = 1
+other_finger = 0
+range_min = -1000.0
+range_lower = -999.0
+range_upper = 10.0
+range_max = 20.0
+range_min = -1000.0
+range_lower = -999.0
+range_upper = 10.0
+range_max = 20.0
+
+[sub_resource type="Resource" id="Resource_475e0"]
+script = ExtResource("1_vkfm2")
+name = "Middle Out"
+rule = 0
+finger = 2
+other_finger = 0
+range_min = -1000.0
+range_lower = -999.0
+range_upper = 30.0
+range_max = 40.0
+range_min = -1000.0
+range_lower = -999.0
+range_upper = 30.0
+range_max = 40.0
+
+[sub_resource type="Resource" id="Resource_aq4h8"]
+script = ExtResource("1_vkfm2")
+name = "Middle Straight"
+rule = 1
+finger = 2
+other_finger = 0
+range_min = -1000.0
+range_lower = -999.0
+range_upper = 10.0
+range_max = 20.0
+range_min = -1000.0
+range_lower = -999.0
+range_upper = 10.0
+range_max = 20.0
+
+[sub_resource type="Resource" id="Resource_jh3h3"]
+script = ExtResource("1_vkfm2")
+name = "Ring Out"
+rule = 0
+finger = 3
+other_finger = 0
+range_min = -1000.0
+range_lower = -999.0
+range_upper = 30.0
+range_max = 40.0
+range_min = -1000.0
+range_lower = -999.0
+range_upper = 30.0
+range_max = 40.0
+
+[sub_resource type="Resource" id="Resource_ju344"]
+script = ExtResource("1_vkfm2")
+name = "Ring Straight"
+rule = 1
+finger = 3
+other_finger = 0
+range_min = -1000.0
+range_lower = -999.0
+range_upper = 10.0
+range_max = 20.0
+range_min = -1000.0
+range_lower = -999.0
+range_upper = 10.0
+range_max = 20.0
+
+[sub_resource type="Resource" id="Resource_45uvj"]
+script = ExtResource("1_vkfm2")
+name = "Pinky Out"
+rule = 0
+finger = 4
+other_finger = 0
+range_min = -1000.0
+range_lower = -999.0
+range_upper = 30.0
+range_max = 40.0
+range_min = -1000.0
+range_lower = -999.0
+range_upper = 30.0
+range_max = 40.0
+
+[sub_resource type="Resource" id="Resource_md1g8"]
+script = ExtResource("1_vkfm2")
+name = "Pinky Straight"
+rule = 1
+finger = 3
+other_finger = 0
+range_min = -1000.0
+range_lower = -999.0
+range_upper = 10.0
+range_max = 20.0
+range_min = -1000.0
+range_lower = -999.0
+range_upper = 10.0
+range_max = 20.0
+
+[sub_resource type="Resource" id="Resource_sxnbp"]
+script = ExtResource("1_vkfm2")
+name = "Index Middle Touching"
+rule = 2
+finger = 1
+other_finger = 2
+range_min = -1000.0
+range_lower = -999.0
+range_upper = 8.0
+range_max = 15.0
+other_finger = 2
+range_min = -1000.0
+range_lower = -999.0
+range_upper = 8.0
+range_max = 15.0
+
+[sub_resource type="Resource" id="Resource_87gc6"]
+script = ExtResource("1_vkfm2")
+name = "Middle Ring Spread"
+rule = 2
+finger = 2
+other_finger = 3
+range_min = 5.0
+range_lower = 8.0
+range_upper = 999.0
+range_max = 1000.0
+other_finger = 3
+range_min = 5.0
+range_lower = 8.0
+range_upper = 999.0
+range_max = 1000.0
+
+[sub_resource type="Resource" id="Resource_hhdmr"]
+script = ExtResource("1_vkfm2")
+name = "Ring Pinky Touching"
+rule = 2
+finger = 3
+other_finger = 4
+range_min = -1000.0
+range_lower = -999.0
+range_upper = 8.0
+range_max = 15.0
+other_finger = 4
+range_min = -1000.0
+range_lower = -999.0
+range_upper = 8.0
+range_max = 15.0
+
+[resource]
+script = ExtResource("2_agcwt")
+pose_name = "Spock"
+threshold = 0.3
+rules = Array[ExtResource("1_vkfm2")]([SubResource("Resource_1aijm"), SubResource("Resource_qtb6d"), SubResource("Resource_4dy62"), SubResource("Resource_e00gh"), SubResource("Resource_475e0"), SubResource("Resource_aq4h8"), SubResource("Resource_jh3h3"), SubResource("Resource_ju344"), SubResource("Resource_45uvj"), SubResource("Resource_md1g8"), SubResource("Resource_sxnbp"), SubResource("Resource_87gc6"), SubResource("Resource_hhdmr")])

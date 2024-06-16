@@ -1,0 +1,81 @@
+[gd_scene load_steps=9 format=3 uid="uid://y0j46ct8rv7f"]
+
+[ext_resource type="Script" path="res://demo.gd" id="1_3t01i"]
+[ext_resource type="PackedScene" uid="uid://cjcehqrfoxav3" path="res://assets/gltf/LeftHandHumanoid.gltf" id="2_qj6xm"]
+[ext_resource type="PackedScene" uid="uid://df5hynbooj1uj" path="res://addons/hand_pose_detector/hand_pose_detector.tscn" id="3_sea3p"]
+[ext_resource type="Resource" uid="uid://ckjd0xa2a240p" path="res://addons/hand_pose_detector/poses/standard_pose_set.tres" id="4_aw253"]
+[ext_resource type="PackedScene" uid="uid://dabmoo0spa6vg" path="res://assets/gltf/RightHandHumanoid.gltf" id="4_uvuof"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gp80n"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_wwtaq"]
+sky_material = SubResource("ProceduralSkyMaterial_gp80n")
+
+[sub_resource type="Environment" id="Environment_42o4x"]
+background_mode = 2
+sky = SubResource("Sky_wwtaq")
+tonemap_mode = 2
+
+[node name="Demo" type="Node3D"]
+script = ExtResource("1_3t01i")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_42o4x")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+
+[node name="LeftTrackedHand" type="XRNode3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 1, 0)
+tracker = &"/user/hand_tracker/left"
+show_when_tracked = true
+
+[node name="LeftHandHumanoid" parent="XROrigin3D/LeftTrackedHand" instance=ExtResource("2_qj6xm")]
+
+[node name="XRHandModifier3D" type="XRHandModifier3D" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D" index="1"]
+
+[node name="LeftHandPose" parent="XROrigin3D/LeftTrackedHand" instance=ExtResource("3_sea3p")]
+hand_pose_set = ExtResource("4_aw253")
+
+[node name="RightTrackedHand" type="XRNode3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 1, 0)
+tracker = &"/user/hand_tracker/right"
+show_when_tracked = true
+
+[node name="RightHandHumanoid" parent="XROrigin3D/RightTrackedHand" instance=ExtResource("4_uvuof")]
+
+[node name="XRHandModifier3D" type="XRHandModifier3D" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid/RightHandHumanoid/Skeleton3D" index="1"]
+hand_tracker = &"/user/hand_tracker/right"
+
+[node name="RightHandPose" parent="XROrigin3D/RightTrackedHand" instance=ExtResource("3_sea3p")]
+hand_pose_set = ExtResource("4_aw253")
+tracker_name = "/user/hand_tracker/right"
+
+[node name="LeftHandLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2, -3)
+text = "Left Hand"
+vertical_alignment = 0
+
+[node name="RightHandLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, -3)
+text = "Right Hand
+"
+vertical_alignment = 0
+
+[connection signal="pose_ended" from="XROrigin3D/LeftTrackedHand/LeftHandPose" to="." method="_on_left_hand_pose_ended"]
+[connection signal="pose_started" from="XROrigin3D/LeftTrackedHand/LeftHandPose" to="." method="_on_left_hand_pose_started"]
+[connection signal="pose_update" from="XROrigin3D/LeftTrackedHand/LeftHandPose" to="." method="_on_left_hand_pose_update"]
+[connection signal="pose_ended" from="XROrigin3D/RightTrackedHand/RightHandPose" to="." method="_on_right_hand_pose_ended"]
+[connection signal="pose_started" from="XROrigin3D/RightTrackedHand/RightHandPose" to="." method="_on_right_hand_pose_started"]
+[connection signal="pose_update" from="XROrigin3D/RightTrackedHand/RightHandPose" to="." method="_on_right_hand_pose_update"]
+
+[editable path="XROrigin3D/LeftTrackedHand/LeftHandHumanoid"]
+[editable path="XROrigin3D/RightTrackedHand/RightHandHumanoid"]

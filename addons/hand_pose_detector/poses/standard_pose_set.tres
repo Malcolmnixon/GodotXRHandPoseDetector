@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="HandPoseSet" load_steps=9 format=3 uid="uid://ckjd0xa2a240p"]
+
+[ext_resource type="Script" path="res://addons/hand_pose_detector/hand_pose.gd" id="1_u751n"]
+[ext_resource type="Script" path="res://addons/hand_pose_detector/hand_pose_set.gd" id="2_nc32a"]
+[ext_resource type="Resource" uid="uid://sy66yqr1xila" path="res://addons/hand_pose_detector/poses/thumbs_up.tres" id="2_ucshc"]
+[ext_resource type="Resource" uid="uid://ra50ueubhepa" path="res://addons/hand_pose_detector/poses/point_thumb_up.tres" id="3_06v1h"]
+[ext_resource type="Resource" uid="uid://ceofxcl7q122" path="res://addons/hand_pose_detector/poses/point.tres" id="3_ngilc"]
+[ext_resource type="Resource" uid="uid://dgl2b6ftbpnrx" path="res://addons/hand_pose_detector/poses/peace_sign.tres" id="5_f8e3l"]
+[ext_resource type="Resource" uid="uid://dhbqusuodrl3r" path="res://addons/hand_pose_detector/poses/fist.tres" id="6_ot263"]
+[ext_resource type="Resource" uid="uid://xghyj4mh4av2" path="res://addons/hand_pose_detector/poses/spock.tres" id="7_nykbc"]
+
+[resource]
+script = ExtResource("2_nc32a")
+poses = Array[ExtResource("1_u751n")]([ExtResource("2_ucshc"), ExtResource("3_06v1h"), ExtResource("3_ngilc"), ExtResource("5_f8e3l"), ExtResource("6_ot263"), ExtResource("7_nykbc")])

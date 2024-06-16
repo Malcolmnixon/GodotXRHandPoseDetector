@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://d11j3o0im2s1e"]
+
+[ext_resource type="Script" path="res://assets/inspect/curl_info.gd" id="1_8wchw"]
+
+[node name="CurlInfo" type="Label3D"]
+text = "Curl (deg)
+
+Thumb: 10
+Index: 20
+Middle: 30
+Ring: 40
+Little: 50"
+vertical_alignment = 0
+script = ExtResource("1_8wchw")
+tracker_name = "/user/hand_tracker/left"

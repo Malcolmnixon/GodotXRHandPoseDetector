@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbb1e0kmoixx0"]
+
+[ext_resource type="Script" path="res://assets/inspect/pose_info.gd" id="1_b38cv"]
+
+[node name="PoseInfo" type="Label3D"]
+text = "Pose"
+vertical_alignment = 0
+script = ExtResource("1_b38cv")

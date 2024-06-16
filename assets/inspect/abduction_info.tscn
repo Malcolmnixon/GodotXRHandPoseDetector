@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1rqhr05usxxy"]
+
+[ext_resource type="Script" path="res://assets/inspect/abduction_info.gd" id="1_o07a6"]
+
+[node name="AbductionInfo" type="Label3D"]
+text = "Abduction (deg)
+
+Thumb/Index: 10
+Index/Middle: 20
+Middle/Ring: 30
+Ring/Pinky: 40"
+vertical_alignment = 0
+script = ExtResource("1_o07a6")
+tracker_name = "/user/hand_tracker/left"

@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://cc1uevricyqo0"]
+
+[ext_resource type="Script" path="res://assets/inspect/flex_info.gd" id="1_0py8v"]
+
+[node name="FlexInfo" type="Label3D"]
+text = "Flex (deg)
+
+Thumb: 10
+Index: 20
+Middle: 30
+Ring: 40
+Little: 50"
+vertical_alignment = 0
+script = ExtResource("1_0py8v")
+tracker_name = "/user/hand_tracker/left"

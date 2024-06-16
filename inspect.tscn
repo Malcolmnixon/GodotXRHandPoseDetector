@@ -1,0 +1,329 @@
+[gd_scene load_steps=18 format=3 uid="uid://smfndn3d0mtp"]
+
+[ext_resource type="PackedScene" uid="uid://cjcehqrfoxav3" path="res://assets/gltf/LeftHandHumanoid.gltf" id="1_2xo61"]
+[ext_resource type="PackedScene" uid="uid://cb8givgqvol3d" path="res://assets/inspect/axis.tscn" id="1_hotic"]
+[ext_resource type="Script" path="res://inspect.gd" id="1_rh4cf"]
+[ext_resource type="PackedScene" uid="uid://dabmoo0spa6vg" path="res://assets/gltf/RightHandHumanoid.gltf" id="2_lordw"]
+[ext_resource type="Texture2D" uid="uid://jmog4gftnc6" path="res://assets/gltf/hand.png" id="3_edpu0"]
+[ext_resource type="PackedScene" uid="uid://cc1uevricyqo0" path="res://assets/inspect/flex_info.tscn" id="6_dybmt"]
+[ext_resource type="PackedScene" uid="uid://d11j3o0im2s1e" path="res://assets/inspect/curl_info.tscn" id="7_oj4m8"]
+[ext_resource type="PackedScene" uid="uid://b1rqhr05usxxy" path="res://assets/inspect/abduction_info.tscn" id="8_5rp6h"]
+[ext_resource type="PackedScene" uid="uid://dvhohpqb12ty5" path="res://assets/inspect/distance_info.tscn" id="9_alc8k"]
+[ext_resource type="PackedScene" uid="uid://cbb1e0kmoixx0" path="res://assets/inspect/pose_info.tscn" id="10_pbatn"]
+[ext_resource type="Resource" uid="uid://dhbqusuodrl3r" path="res://addons/hand_pose_detector/poses/fist.tres" id="11_1qjtv"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gp80n"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_wwtaq"]
+sky_material = SubResource("ProceduralSkyMaterial_gp80n")
+
+[sub_resource type="Environment" id="Environment_42o4x"]
+background_mode = 2
+sky = SubResource("Sky_wwtaq")
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uqtqc"]
+resource_name = "Hand"
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.501961)
+albedo_texture = ExtResource("3_edpu0")
+roughness = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_l375f"]
+radius = 0.005
+height = 0.01
+radial_segments = 8
+rings = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lnvj1"]
+resource_name = "Hand"
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.501961)
+albedo_texture = ExtResource("3_edpu0")
+roughness = 0.5
+
+[node name="Inspect" type="Node3D"]
+script = ExtResource("1_rh4cf")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_42o4x")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+
+[node name="LeftTrackedHand" type="XRNode3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 1, 0)
+tracker = &"/user/hand_tracker/left"
+show_when_tracked = true
+
+[node name="Axis" parent="XROrigin3D/LeftTrackedHand" instance=ExtResource("1_hotic")]
+
+[node name="LeftHandHumanoid" parent="XROrigin3D/LeftTrackedHand" instance=ExtResource("1_2xo61")]
+
+[node name="LeftHandHumanoidMesh" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_uqtqc")
+
+[node name="XRHandModifier3D" type="XRHandModifier3D" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D" index="1"]
+
+[node name="ThumbProximal" type="BoneAttachment3D" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D" index="2"]
+transform = Transform3D(-0.648694, 0.204344, 0.733102, -0.555012, 0.532075, -0.639419, -0.520727, -0.821669, -0.231741, 0.0123109, 0.0475754, -0.0353648)
+bone_name = "LeftThumbProximal"
+bone_idx = 2
+
+[node name="Axis" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D/ThumbProximal" instance=ExtResource("1_hotic")]
+
+[node name="ThumbDistal" type="BoneAttachment3D" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D" index="3"]
+transform = Transform3D(-0.652862, 0.233875, 0.720468, -0.508143, 0.570149, -0.645539, -0.561749, -0.787548, -0.253387, 0.0209236, 0.0700013, -0.0699964)
+bone_name = "LeftThumbDistal"
+bone_idx = 3
+
+[node name="Axis" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D/ThumbDistal" instance=ExtResource("1_hotic")]
+
+[node name="ThumbTip" type="BoneAttachment3D" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D" index="4"]
+transform = Transform3D(-0.651184, 0.19507, 0.733421, -0.551782, 0.54181, -0.634018, -0.521053, -0.817551, -0.245182, 0.0281151, 0.087533, -0.0942131)
+bone_name = "LeftThumbTip"
+bone_idx = 4
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D/ThumbTip"]
+mesh = SubResource("SphereMesh_l375f")
+
+[node name="IndexProximal" type="BoneAttachment3D" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D" index="5"]
+transform = Transform3D(-0.0317618, -0.19548, 0.980193, -0.975136, 0.221253, 0.0125266, -0.21932, -0.955423, -0.197647, -0.0140543, 0.0224711, -0.0802293)
+bone_name = "LeftIndexProximal"
+bone_idx = 6
+
+[node name="Axis" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D/IndexProximal" instance=ExtResource("1_hotic")]
+
+[node name="IndexDistal" type="BoneAttachment3D" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D" index="6"]
+transform = Transform3D(0.051258, 0.1879, 0.98085, -0.974995, 0.222064, 0.00841168, -0.216231, -0.956755, 0.194584, -0.0161964, 0.0369202, -0.145665)
+bone_name = "LeftIndexDistal"
+bone_idx = 8
+
+[node name="Axis" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D/IndexDistal" instance=ExtResource("1_hotic")]
+
+[node name="IndexTip" type="BoneAttachment3D" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D" index="7"]
+transform = Transform3D(0.0148923, 0.3927, 0.919546, -0.993092, 0.112853, -0.0321113, -0.116383, -0.912716, 0.391668, -0.0111001, 0.0429431, -0.171614)
+bone_name = "LeftIndexTip"
+bone_idx = 9
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D/IndexTip"]
+mesh = SubResource("SphereMesh_l375f")
+
+[node name="MiddleProximal" type="BoneAttachment3D" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D" index="8"]
+transform = Transform3D(0.00370937, 0.00840212, 0.999958, -0.995584, -0.0937702, 0.00448101, 0.093804, -0.995558, 0.00801718, -0.0180297, -0.00207136, -0.0798278)
+bone_name = "LeftMiddleProximal"
+bone_idx = 11
+
+[node name="Axis" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D/MiddleProximal" instance=ExtResource("1_hotic")]
+
+[node name="MiddleDistal" type="BoneAttachment3D" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D" index="9"]
+transform = Transform3D(-0.00192412, 0.102657, 0.994715, -0.999299, -0.0373781, 0.00192448, 0.0373782, -0.994014, 0.102657, -0.012456, -0.0067641, -0.15594)
+bone_name = "LeftMiddleDistal"
+bone_idx = 13
+
+[node name="Axis" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D/MiddleDistal" instance=ExtResource("1_hotic")]
+
+[node name="MiddleTip" type="BoneAttachment3D" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D" index="10"]
+transform = Transform3D(-0.00126867, 0.405917, 0.913909, -0.999884, -0.014399, 0.00500735, 0.0151921, -0.913796, 0.405888, -0.00955627, -0.00781992, -0.184018)
+bone_name = "LeftMiddleTip"
+bone_idx = 14
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D/MiddleTip"]
+mesh = SubResource("SphereMesh_l375f")
+
+[node name="RingProximal" type="BoneAttachment3D" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D" index="11"]
+transform = Transform3D(0.0145049, -0.031703, 0.999392, -0.970672, -0.240321, 0.00646455, 0.23997, -0.970175, -0.0342591, -0.0126694, -0.0234518, -0.0731273)
+bone_name = "LeftRingProximal"
+bone_idx = 16
+
+[node name="Axis" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D/RingProximal" instance=ExtResource("1_hotic")]
+
+[node name="RingDistal" type="BoneAttachment3D" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D" index="12"]
+transform = Transform3D(-0.0494087, 0.143267, 0.98845, -0.976848, -0.213183, -0.0179297, 0.208152, -0.966451, 0.150483, -0.00945323, -0.0387602, -0.138118)
+bone_name = "LeftRingDistal"
+bone_idx = 18
+
+[node name="Axis" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D/RingDistal" instance=ExtResource("1_hotic")]
+
+[node name="RingTip" type="BoneAttachment3D" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D" index="13"]
+transform = Transform3D(-0.0185268, 0.404878, 0.914183, -0.986399, -0.156755, 0.0494341, 0.163318, -0.900834, 0.402275, -0.00473959, -0.0457741, -0.169915)
+bone_name = "LeftRingTip"
+bone_idx = 19
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D/RingTip"]
+mesh = SubResource("SphereMesh_l375f")
+
+[node name="PinkyProximal" type="BoneAttachment3D" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D" index="14"]
+transform = Transform3D(0.00766499, 0.045248, 0.998946, -0.935528, -0.352493, 0.0231448, 0.353169, -0.93472, 0.039629, -0.0037233, -0.0418705, -0.0644819)
+bone_name = "LeftLittleProximal"
+bone_idx = 21
+
+[node name="Axis" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D/PinkyProximal" instance=ExtResource("1_hotic")]
+
+[node name="PinkyDistal" type="BoneAttachment3D" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D" index="15"]
+transform = Transform3D(-0.0810786, 0.289735, 0.953666, -0.955747, -0.294077, 0.00808847, 0.282795, -0.910808, 0.300757, 0.00223823, -0.0582203, -0.111493)
+bone_name = "LeftLittleDistal"
+bone_idx = 23
+
+[node name="Axis" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D/PinkyDistal" instance=ExtResource("1_hotic")]
+
+[node name="PinkyTip" type="BoneAttachment3D" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D" index="16"]
+transform = Transform3D(-0.0340046, 0.359157, 0.932657, -0.961705, -0.265706, 0.067257, 0.271969, -0.894654, 0.354438, 0.00791415, -0.0639813, -0.129335)
+bone_name = "LeftLittleTip"
+bone_idx = 24
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D/PinkyTip"]
+mesh = SubResource("SphereMesh_l375f")
+
+[node name="RightTrackedHand" type="XRNode3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 1, 0)
+tracker = &"/user/hand_tracker/right"
+show_when_tracked = true
+
+[node name="Axis" parent="XROrigin3D/RightTrackedHand" instance=ExtResource("1_hotic")]
+
+[node name="RightHandHumanoid2" parent="XROrigin3D/RightTrackedHand" instance=ExtResource("2_lordw")]
+
+[node name="RightHandHumanoidMesh" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lnvj1")
+
+[node name="XRHandModifier3D" type="XRHandModifier3D" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" index="1"]
+hand_tracker = &"/user/hand_tracker/right"
+
+[node name="ThumbProximal" type="BoneAttachment3D" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" index="2"]
+transform = Transform3D(-0.648694, -0.204344, -0.733102, 0.555012, 0.532075, -0.639419, 0.520727, -0.821669, -0.231741, -0.0123109, 0.0475754, -0.0353648)
+bone_name = "LeftThumbProximal"
+bone_idx = 2
+
+[node name="Axis" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D/ThumbProximal" instance=ExtResource("1_hotic")]
+
+[node name="ThumbDistal" type="BoneAttachment3D" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" index="3"]
+transform = Transform3D(-0.652862, -0.233875, -0.720468, 0.508143, 0.570149, -0.645539, 0.561749, -0.787548, -0.253387, -0.0209236, 0.0700013, -0.0699964)
+bone_name = "LeftThumbDistal"
+bone_idx = 3
+
+[node name="Axis" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D/ThumbDistal" instance=ExtResource("1_hotic")]
+
+[node name="ThumbTip" type="BoneAttachment3D" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" index="4"]
+transform = Transform3D(-0.636315, -0.19507, -0.746358, 0.56441, 0.54181, -0.622803, 0.525874, -0.817551, -0.234663, -0.0281151, 0.087533, -0.0942131)
+bone_name = "LeftThumbTip"
+bone_idx = 4
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D/ThumbTip"]
+mesh = SubResource("SphereMesh_l375f")
+
+[node name="IndexProximal" type="BoneAttachment3D" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" index="5"]
+transform = Transform3D(-0.0317618, 0.19548, -0.980193, 0.975136, 0.221253, 0.0125266, 0.21932, -0.955423, -0.197647, 0.0140543, 0.0224711, -0.0802293)
+bone_name = "LeftIndexProximal"
+bone_idx = 6
+
+[node name="Axis" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D/IndexProximal" instance=ExtResource("1_hotic")]
+
+[node name="IndexDistal" type="BoneAttachment3D" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" index="6"]
+transform = Transform3D(0.0514106, -0.187908, -0.98084, 0.974994, 0.222067, 0.00856074, 0.216203, -0.956753, 0.194626, 0.0161964, 0.0369202, -0.145665)
+bone_name = "LeftIndexDistal"
+bone_idx = 8
+
+[node name="Axis" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D/IndexDistal" instance=ExtResource("1_hotic")]
+
+[node name="IndexTip" type="BoneAttachment3D" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" index="7"]
+transform = Transform3D(0.0190384, -0.392689, -0.919474, 0.993227, 0.112853, -0.0276318, 0.114616, -0.912721, 0.392177, 0.0111, 0.042943, -0.171613)
+bone_name = "LeftIndexTip"
+bone_idx = 9
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D/IndexTip"]
+mesh = SubResource("SphereMesh_l375f")
+
+[node name="MiddleProximal" type="BoneAttachment3D" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" index="8"]
+transform = Transform3D(0.00370937, -0.00840212, -0.999958, 0.995584, -0.0937702, 0.00448101, -0.093804, -0.995558, 0.00801718, 0.0180297, -0.00207136, -0.0798278)
+bone_name = "LeftMiddleProximal"
+bone_idx = 11
+
+[node name="Axis" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D/MiddleProximal" instance=ExtResource("1_hotic")]
+
+[node name="MiddleDistal" type="BoneAttachment3D" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" index="9"]
+transform = Transform3D(-0.00991634, -0.102648, -0.994668, 0.999283, -0.0373743, -0.0061054, -0.0365484, -0.994015, 0.102945, 0.012456, -0.0067641, -0.15594)
+bone_name = "LeftMiddleDistal"
+bone_idx = 13
+
+[node name="Axis" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D/MiddleDistal" instance=ExtResource("1_hotic")]
+
+[node name="MiddleTip" type="BoneAttachment3D" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" index="10"]
+transform = Transform3D(-0.00151726, -0.400086, -0.916476, 0.999885, -0.0144084, 0.00463456, -0.0150593, -0.916364, 0.400062, 0.00955647, -0.00781982, -0.184018)
+bone_name = "LeftMiddleTip"
+bone_idx = 14
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D/MiddleTip"]
+mesh = SubResource("SphereMesh_l375f")
+
+[node name="RingProximal" type="BoneAttachment3D" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" index="11"]
+transform = Transform3D(0.0145049, 0.031703, -0.999392, 0.970672, -0.240321, 0.00646455, -0.23997, -0.970175, -0.0342591, 0.0126694, -0.0234518, -0.0731273)
+bone_name = "LeftRingProximal"
+bone_idx = 16
+
+[node name="Axis" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D/RingProximal" instance=ExtResource("1_hotic")]
+
+[node name="RingDistal" type="BoneAttachment3D" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" index="12"]
+transform = Transform3D(-0.0494087, -0.143267, -0.98845, 0.976848, -0.213183, -0.0179297, -0.208152, -0.966451, 0.150483, 0.00945323, -0.0387602, -0.138118)
+bone_name = "LeftRingDistal"
+bone_idx = 18
+
+[node name="Axis" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D/RingDistal" instance=ExtResource("1_hotic")]
+
+[node name="RingTip" type="BoneAttachment3D" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" index="13"]
+transform = Transform3D(-0.0185268, -0.404878, -0.914183, 0.986399, -0.156755, 0.0494341, -0.163318, -0.900834, 0.402275, 0.00473959, -0.0457741, -0.169915)
+bone_name = "LeftRingTip"
+bone_idx = 19
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D/RingTip"]
+mesh = SubResource("SphereMesh_l375f")
+
+[node name="PinkyProximal" type="BoneAttachment3D" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" index="14"]
+transform = Transform3D(0.00766499, -0.045248, -0.998946, 0.935528, -0.352493, 0.0231448, -0.353169, -0.93472, 0.039629, 0.0037233, -0.0418705, -0.0644819)
+bone_name = "LeftLittleProximal"
+bone_idx = 21
+
+[node name="Axis" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D/PinkyProximal" instance=ExtResource("1_hotic")]
+
+[node name="PinkyDistal" type="BoneAttachment3D" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" index="15"]
+transform = Transform3D(-0.0810786, -0.289735, -0.953666, 0.955747, -0.294077, 0.00808847, -0.282795, -0.910808, 0.300757, -0.00223823, -0.0582203, -0.111493)
+bone_name = "LeftLittleDistal"
+bone_idx = 23
+
+[node name="Axis" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D/PinkyDistal" instance=ExtResource("1_hotic")]
+
+[node name="PinkyTip" type="BoneAttachment3D" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" index="16"]
+transform = Transform3D(-0.0340046, -0.359157, -0.932657, 0.961705, -0.265706, 0.067257, -0.271969, -0.894654, 0.354438, -0.00791415, -0.0639813, -0.129335)
+bone_name = "LeftLittleTip"
+bone_idx = 24
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D/PinkyTip"]
+mesh = SubResource("SphereMesh_l375f")
+
+[node name="FlexInfo" parent="." instance=ExtResource("6_dybmt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.2, -3)
+
+[node name="CurlInfo" parent="." instance=ExtResource("7_oj4m8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3.2, -3)
+
+[node name="AbductionInfo" parent="." instance=ExtResource("8_5rp6h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3.2, -3)
+
+[node name="DistanceInfo" parent="." instance=ExtResource("9_alc8k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3.2, -3)
+
+[node name="PoseInfo" parent="." instance=ExtResource("10_pbatn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -3)
+pose = ExtResource("11_1qjtv")
+tracker_name = "/user/hand_tracker/left"
+
+[editable path="XROrigin3D/LeftTrackedHand/LeftHandHumanoid"]
+[editable path="XROrigin3D/RightTrackedHand/RightHandHumanoid2"]

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://df5hynbooj1uj"]
+
+[ext_resource type="Script" path="res://addons/hand_pose_detector/hand_pose_detector.gd" id="1_rrxmu"]
+
+[node name="HandPoseDetector" type="Node"]
+script = ExtResource("1_rrxmu")
+tracker_name = "/user/hand_tracker/left"

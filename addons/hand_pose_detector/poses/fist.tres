@@ -1,0 +1,145 @@
+[gd_resource type="Resource" script_class="HandPose" load_steps=12 format=3 uid="uid://dhbqusuodrl3r"]
+
+[ext_resource type="Script" path="res://addons/hand_pose_detector/hand_pose_rule.gd" id="1_h45mf"]
+[ext_resource type="Script" path="res://addons/hand_pose_detector/hand_pose.gd" id="2_ykawg"]
+
+[sub_resource type="Resource" id="Resource_y7a6e"]
+script = ExtResource("1_h45mf")
+name = "Thumb In"
+rule = 0
+finger = 0
+other_finger = 0
+range_min = 40.0
+range_lower = 60.0
+range_upper = 999.0
+range_max = 1000.0
+range_min = 40.0
+range_lower = 60.0
+range_upper = 999.0
+range_max = 1000.0
+
+[sub_resource type="Resource" id="Resource_ks0li"]
+script = ExtResource("1_h45mf")
+name = "Index In"
+rule = 0
+finger = 1
+other_finger = 0
+range_min = 30.0
+range_lower = 45.0
+range_upper = 999.0
+range_max = 1000.0
+range_min = 30.0
+range_lower = 45.0
+range_upper = 999.0
+range_max = 1000.0
+
+[sub_resource type="Resource" id="Resource_hl5n1"]
+script = ExtResource("1_h45mf")
+name = "Middle In"
+rule = 0
+finger = 2
+other_finger = 0
+range_min = 40.0
+range_lower = 60.0
+range_upper = 999.0
+range_max = 1000.0
+range_min = 40.0
+range_lower = 60.0
+range_upper = 999.0
+range_max = 1000.0
+
+[sub_resource type="Resource" id="Resource_kxrj6"]
+script = ExtResource("1_h45mf")
+name = "Ring In"
+rule = 0
+finger = 3
+other_finger = 0
+range_min = 40.0
+range_lower = 60.0
+range_upper = 999.0
+range_max = 1000.0
+range_min = 40.0
+range_lower = 60.0
+range_upper = 999.0
+range_max = 1000.0
+
+[sub_resource type="Resource" id="Resource_quhto"]
+script = ExtResource("1_h45mf")
+name = "Pinky In"
+rule = 0
+finger = 4
+other_finger = 0
+range_min = 40.0
+range_lower = 60.0
+range_upper = 999.0
+range_max = 1000.0
+range_min = 40.0
+range_lower = 60.0
+range_upper = 999.0
+range_max = 1000.0
+
+[sub_resource type="Resource" id="Resource_1wfog"]
+script = ExtResource("1_h45mf")
+name = "Index Curled"
+rule = 1
+finger = 1
+other_finger = 0
+range_min = 60.0
+range_lower = 80.0
+range_upper = 999.0
+range_max = 1000.0
+range_min = 60.0
+range_lower = 80.0
+range_upper = 999.0
+range_max = 1000.0
+
+[sub_resource type="Resource" id="Resource_jiii6"]
+script = ExtResource("1_h45mf")
+name = "Middle Curled"
+rule = 1
+finger = 2
+other_finger = 0
+range_min = 80.0
+range_lower = 110.0
+range_upper = 999.0
+range_max = 1000.0
+range_min = 80.0
+range_lower = 110.0
+range_upper = 999.0
+range_max = 1000.0
+
+[sub_resource type="Resource" id="Resource_u0ca7"]
+script = ExtResource("1_h45mf")
+name = "Ring Curled"
+rule = 1
+finger = 3
+other_finger = 0
+range_min = 80.0
+range_lower = 110.0
+range_upper = 999.0
+range_max = 1000.0
+range_min = 80.0
+range_lower = 110.0
+range_upper = 999.0
+range_max = 1000.0
+
+[sub_resource type="Resource" id="Resource_mkd6w"]
+script = ExtResource("1_h45mf")
+name = "Pinky Curled"
+rule = 1
+finger = 4
+other_finger = 0
+range_min = 80.0
+range_lower = 110.0
+range_upper = 999.0
+range_max = 1000.0
+range_min = 80.0
+range_lower = 110.0
+range_upper = 999.0
+range_max = 1000.0
+
+[resource]
+script = ExtResource("2_ykawg")
+pose_name = "Fist"
+threshold = 0.3
+rules = Array[ExtResource("1_h45mf")]([SubResource("Resource_y7a6e"), SubResource("Resource_ks0li"), SubResource("Resource_hl5n1"), SubResource("Resource_kxrj6"), SubResource("Resource_quhto"), SubResource("Resource_1wfog"), SubResource("Resource_jiii6"), SubResource("Resource_u0ca7"), SubResource("Resource_mkd6w")])
