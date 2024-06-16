@@ -13,21 +13,17 @@ const _DIAGNOSTIC_TEXT = \
 
 
 ## Name of the hand pose tracker
-var tracker_name : String = "/user/hand_tracker/left"
+@export var tracker_name : String = "/user/hand_tracker/left"
 
 # Hand tracker instance
 var tracker : XRHandTracker
 
 
-# Customize the property lists
-func _get_property_list() -> Array[Dictionary]:
-	return [{
-		"name" : "tracker_name",
-		"type" : TYPE_STRING,
-		"usage" : PROPERTY_USAGE_DEFAULT,
-		"hint" : PROPERTY_HINT_ENUM_SUGGESTION,
-		"hint_string" : "/user/hand_tracker/left,/user/hand_tracker/right"
-	}]
+# Customize the properties
+func _validate_property(property: Dictionary) -> void:
+	if property.name == "tracker_name":
+		property.hint = PROPERTY_HINT_ENUM_SUGGESTION
+		property.hint_string = "/user/hand_tracker/left,/user/hand_tracker/right"
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
