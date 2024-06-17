@@ -6,10 +6,10 @@ extends Label3D
 # Diagnostic Text Template
 const _DIAGNOSTIC_TEXT = \
 	"Distance (mm)\n\n" + \
-	"Thumb/Index: {thb_idx}\n" + \
-	"Thumb/Middle: {thb_mid}\n" + \
-	"Thumb/Ring: {thb_rng}\n" + \
-	"Thumb/Pinky: {thb_pky}"
+	"Thumb/Index: {dst_index}\n" + \
+	"Thumb/Middle: {dst_middle}\n" + \
+	"Thumb/Ring: {dst_ring}\n" + \
+	"Thumb/Pinky: {dst_pinky}"
 
 
 ## Name of the hand pose tracker
@@ -39,16 +39,14 @@ func _process(_delta: float) -> void:
 			return
 
 	# Gather the data
-	var data := {
-		"thb_idx" : int(HandInfo.tip_distance(
-			tracker, HandInfo.Finger.THUMB, HandInfo.Finger.INDEX)),
-		"thb_mid" : int(HandInfo.tip_distance(
-			tracker, HandInfo.Finger.THUMB, HandInfo.Finger.MIDDLE)),
-		"thb_rng" : int(HandInfo.tip_distance(
-			tracker, HandInfo.Finger.THUMB, HandInfo.Finger.RING)),
-		"thb_pky" : int(HandInfo.tip_distance(
-			tracker, HandInfo.Finger.THUMB, HandInfo.Finger.PINKY))
+	var data := HandPoseData.new()
+	data.update(tracker)
+	var text_data := {
+		"dst_index"  : int(data.dst_index),
+		"dst_middle" : int(data.dst_middle),
+		"dst_ring"   : int(data.dst_ring),
+		"dst_pinky"  : int(data.dst_pinky)
 	}
 
 	# Format the text
-	text = _DIAGNOSTIC_TEXT.format(data)
+	text = _DIAGNOSTIC_TEXT.format(text_data)

@@ -27,6 +27,9 @@ signal pose_ended(p_name : String)
 # Current hand tracker
 var tracker : XRHandTracker
 
+# Current hand pose data
+var _current_data : HandPoseData = HandPoseData.new()
+
 # Current hand pose
 var _current_pose : String = ""
 
@@ -55,7 +58,8 @@ func _process(_delta: float) -> void:
 			return
 
 	# Find the pose
-	var pose_match := hand_pose_set.find_pose(tracker)
+	_current_data.update(tracker)
+	var pose_match := hand_pose_set.find_pose(_current_data)
 	var pose : String = pose_match.pose
 	var fitness : float = pose_match.fitness
 

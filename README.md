@@ -54,22 +54,11 @@ New hand poses can be made by creating new Hand Pose Resource instances.
 Hand Pose Resources consist of:
 * A Pose Name (reported in the pose detector signals)
 * A Threshold (a minimal fitness threshold to report the pose)
-* An array of Hand Pose Rules
+* A set of fitness functions to apply to each pose component
 
-### Hand Pose Rules
+### Pose Components
 
-![Hand Pose Rule](/docs/hand_pose_rule.png)
-
-Hand Pose Rules consist of:
-* A Rule Name (useful for tuning and debugging)
-* A Rule Type [Flexion, Curl, Abduciton, and Tip-Distance]
-* A Finger
-* A second Finger (for Abduction and Tip-Distance)
-* Fitness Function Terms (min, lower, upper, max)
-
-### Rule Types
-
-| Rule | Description |
+| Type | Description |
 | :--- | :---------- |
 | Flexion | The angle (in degrees) of a fingers proximal joint curving into the palm to make a fist. |
 | Curl | The curl (in degrees) of a finger from the proximal to the distal joints. |
@@ -78,10 +67,25 @@ Hand Pose Rules consist of:
 
 ### Fitness Function
 
-Each rule produces a measurement in either degrees or millimeters. This measurement is translated to a fitness value in the range 0..1 using a transform defined by the fitness function terms. Values outside of the min/max range have a fitness of 0. Values inside the lower/upper range have a fitness of 1, and min-lower and upper-max are connected by a smoothstep function:
-![Fitness Transform](/docs/fitness-transform.png)
+The fitness function converts a measurement (degrees or milimeters) into a fitness in the range 0..1 with 0 being a bad match, and 1 being a perfect match. Two types of fitness function are supported:
+* Smoothstep
+* Range
 
-The fitness of a Hand Pose is the product of the fitness of all the rules.
+The fitness of a Hand Pose is the product of the fitness of all the components.
+
+#### Smooth-Step Function
+
+The Smooth-Step function transitions from 0 to 1 over the specified range. The paramerters may be reversed to reverse the function.
+
+![SmoothStep Positive](/docs/smootstep_positive.png)
+![SmoothStep Negative](/docs/smootstep_negative.png)
+
+#### Range Function
+
+The Range function provides non-zero values in a finite range.
+
+![Fitness Transform](/docs/range_function.png)
+
 
 ## Designing and Tuning
 

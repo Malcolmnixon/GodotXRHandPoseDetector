@@ -14,7 +14,7 @@ extends Resource
 
 
 ## Returns the best pose for the specified [param hand].
-func find_pose(hand : XRHandTracker) -> Dictionary:
+func find_pose(hand : HandPoseData) -> Dictionary:
 	# Search for the best pose
 	var best_pose := ""
 	var best_fitness := 0.0
