@@ -1,90 +1,9 @@
-[gd_resource type="Resource" script_class="HandPose" load_steps=22 format=3 uid="uid://dhbqusuodrl3r"]
+[gd_resource type="Resource" script_class="HandPose" load_steps=12 format=3 uid="uid://dhbqusuodrl3r"]
 
-[ext_resource type="Script" path="res://addons/hand_pose_detector/hand_pose_rule.gd" id="1_h45mf"]
 [ext_resource type="Script" path="res://addons/hand_pose_detector/fitness_function.gd" id="2_jupks"]
 [ext_resource type="Script" path="res://addons/hand_pose_detector/hand_pose.gd" id="2_ykawg"]
 
-[sub_resource type="Resource" id="Resource_hnjdi"]
-script = ExtResource("2_jupks")
-type = 0
-min = 0.0
-from = 40.0
-to = 60.0
-max = 0.0
-
-[sub_resource type="Resource" id="Resource_y7a6e"]
-script = ExtResource("1_h45mf")
-name = "Thumb In"
-rule = 0
-finger = 0
-other_finger = 0
-function = SubResource("Resource_hnjdi")
-
-[sub_resource type="Resource" id="Resource_yo6jd"]
-script = ExtResource("2_jupks")
-type = 0
-min = 0.0
-from = 30.0
-to = 45.0
-max = 0.0
-
-[sub_resource type="Resource" id="Resource_ks0li"]
-script = ExtResource("1_h45mf")
-name = "Index In"
-rule = 0
-finger = 1
-other_finger = 0
-function = SubResource("Resource_yo6jd")
-
-[sub_resource type="Resource" id="Resource_olv2i"]
-script = ExtResource("2_jupks")
-type = 0
-min = 0.0
-from = 40.0
-to = 60.0
-max = 0.0
-
-[sub_resource type="Resource" id="Resource_hl5n1"]
-script = ExtResource("1_h45mf")
-name = "Middle In"
-rule = 0
-finger = 2
-other_finger = 0
-function = SubResource("Resource_olv2i")
-
-[sub_resource type="Resource" id="Resource_sxsos"]
-script = ExtResource("2_jupks")
-type = 0
-min = 0.0
-from = 40.0
-to = 60.0
-max = 0.0
-
-[sub_resource type="Resource" id="Resource_kxrj6"]
-script = ExtResource("1_h45mf")
-name = "Ring In"
-rule = 0
-finger = 3
-other_finger = 0
-function = SubResource("Resource_sxsos")
-
-[sub_resource type="Resource" id="Resource_k46vx"]
-script = ExtResource("2_jupks")
-type = 0
-min = 0.0
-from = 40.0
-to = 60.0
-max = 0.0
-
-[sub_resource type="Resource" id="Resource_quhto"]
-script = ExtResource("1_h45mf")
-name = "Pinky In"
-rule = 0
-finger = 4
-other_finger = 0
-function = SubResource("Resource_k46vx")
-
-[sub_resource type="Resource" id="Resource_1w5t7"]
+[sub_resource type="Resource" id="Resource_7pxg4"]
 script = ExtResource("2_jupks")
 type = 0
 min = 0.0
@@ -92,15 +11,7 @@ from = 60.0
 to = 80.0
 max = 0.0
 
-[sub_resource type="Resource" id="Resource_1wfog"]
-script = ExtResource("1_h45mf")
-name = "Index Curled"
-rule = 1
-finger = 1
-other_finger = 0
-function = SubResource("Resource_1w5t7")
-
-[sub_resource type="Resource" id="Resource_llamj"]
+[sub_resource type="Resource" id="Resource_1fcsh"]
 script = ExtResource("2_jupks")
 type = 0
 min = 0.0
@@ -108,15 +19,7 @@ from = 80.0
 to = 110.0
 max = 0.0
 
-[sub_resource type="Resource" id="Resource_jiii6"]
-script = ExtResource("1_h45mf")
-name = "Middle Curled"
-rule = 1
-finger = 2
-other_finger = 0
-function = SubResource("Resource_llamj")
-
-[sub_resource type="Resource" id="Resource_dkehb"]
+[sub_resource type="Resource" id="Resource_xvjny"]
 script = ExtResource("2_jupks")
 type = 0
 min = 0.0
@@ -124,15 +27,7 @@ from = 80.0
 to = 110.0
 max = 0.0
 
-[sub_resource type="Resource" id="Resource_u0ca7"]
-script = ExtResource("1_h45mf")
-name = "Ring Curled"
-rule = 1
-finger = 3
-other_finger = 0
-function = SubResource("Resource_dkehb")
-
-[sub_resource type="Resource" id="Resource_iuw7x"]
+[sub_resource type="Resource" id="Resource_yjd2j"]
 script = ExtResource("2_jupks")
 type = 0
 min = 0.0
@@ -140,16 +35,56 @@ from = 80.0
 to = 110.0
 max = 0.0
 
-[sub_resource type="Resource" id="Resource_mkd6w"]
-script = ExtResource("1_h45mf")
-name = "Pinky Curled"
-rule = 1
-finger = 4
-other_finger = 0
-function = SubResource("Resource_iuw7x")
+[sub_resource type="Resource" id="Resource_j5qa6"]
+script = ExtResource("2_jupks")
+type = 0
+min = 0.0
+from = 30.0
+to = 45.0
+max = 0.0
+
+[sub_resource type="Resource" id="Resource_rmm3v"]
+script = ExtResource("2_jupks")
+type = 0
+min = 0.0
+from = 40.0
+to = 60.0
+max = 0.0
+
+[sub_resource type="Resource" id="Resource_bmko8"]
+script = ExtResource("2_jupks")
+type = 0
+min = 0.0
+from = 40.0
+to = 60.0
+max = 0.0
+
+[sub_resource type="Resource" id="Resource_crwu0"]
+script = ExtResource("2_jupks")
+type = 0
+min = 0.0
+from = 40.0
+to = 60.0
+max = 0.0
+
+[sub_resource type="Resource" id="Resource_nb4va"]
+script = ExtResource("2_jupks")
+type = 0
+min = 0.0
+from = 40.0
+to = 60.0
+max = 0.0
 
 [resource]
 script = ExtResource("2_ykawg")
 pose_name = "Fist"
 threshold = 0.3
-rules = Array[ExtResource("1_h45mf")]([SubResource("Resource_y7a6e"), SubResource("Resource_ks0li"), SubResource("Resource_hl5n1"), SubResource("Resource_kxrj6"), SubResource("Resource_quhto"), SubResource("Resource_1wfog"), SubResource("Resource_jiii6"), SubResource("Resource_u0ca7"), SubResource("Resource_mkd6w")])
+flexion_thumb = SubResource("Resource_nb4va")
+flexion_index = SubResource("Resource_j5qa6")
+flexion_middle = SubResource("Resource_rmm3v")
+flexion_ring = SubResource("Resource_crwu0")
+flexion_pinky = SubResource("Resource_bmko8")
+curl_index = SubResource("Resource_7pxg4")
+curl_middle = SubResource("Resource_1fcsh")
+curl_ring = SubResource("Resource_yjd2j")
+curl_pinky = SubResource("Resource_xvjny")

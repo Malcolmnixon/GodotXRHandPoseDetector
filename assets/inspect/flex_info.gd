@@ -6,11 +6,11 @@ extends Label3D
 # Diagnostic Text Template
 const _DIAGNOSTIC_TEXT = \
 	"Flex (deg)\n\n" + \
-	"Thumb: {thb}\n" + \
-	"Index: {idx}\n" + \
-	"Middle: {mid}\n" + \
-	"Ring: {rng}\n" + \
-	"Pinky: {pky}"
+	"Thumb: {flx_thumb}\n" + \
+	"Index: {flx_index}\n" + \
+	"Middle: {flx_middle}\n" + \
+	"Ring: {flx_ring}\n" + \
+	"Pinky: {flx_pinky}"
 
 
 ## Name of the hand pose tracker
@@ -40,13 +40,15 @@ func _process(_delta: float) -> void:
 			return
 
 	# Gather the data
-	var data := {
-		"thb" : int(HandInfo.flexion(tracker, HandInfo.Finger.THUMB)),
-		"idx" : int(HandInfo.flexion(tracker, HandInfo.Finger.INDEX)),
-		"mid" : int(HandInfo.flexion(tracker, HandInfo.Finger.MIDDLE)),
-		"rng" : int(HandInfo.flexion(tracker, HandInfo.Finger.RING)),
-		"pky" : int(HandInfo.flexion(tracker, HandInfo.Finger.PINKY)),
+	var data := HandPoseData.new()
+	data.update(tracker)
+	var text_data := {
+		"flx_thumb" : int(data.flx_thumb),
+		"flx_index" : int(data.flx_index),
+		"flx_middle" : int(data.flx_middle),
+		"flx_ring" : int(data.flx_ring),
+		"flx_pinky" : int(data.flx_pinky),
 	}
 
 	# Format the text
-	text = _DIAGNOSTIC_TEXT.format(data)
+	text = _DIAGNOSTIC_TEXT.format(text_data)

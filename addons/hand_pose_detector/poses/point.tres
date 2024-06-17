@@ -1,26 +1,9 @@
-[gd_resource type="Resource" script_class="HandPose" load_steps=14 format=3 uid="uid://ceofxcl7q122"]
+[gd_resource type="Resource" script_class="HandPose" load_steps=8 format=3 uid="uid://ceofxcl7q122"]
 
-[ext_resource type="Script" path="res://addons/hand_pose_detector/hand_pose_rule.gd" id="1_ouq44"]
 [ext_resource type="Script" path="res://addons/hand_pose_detector/hand_pose.gd" id="2_fvjog"]
 [ext_resource type="Script" path="res://addons/hand_pose_detector/fitness_function.gd" id="2_kgqxd"]
 
-[sub_resource type="Resource" id="Resource_sk616"]
-script = ExtResource("2_kgqxd")
-type = 0
-min = 0.0
-from = 40.0
-to = 20.0
-max = 0.0
-
-[sub_resource type="Resource" id="Resource_cvryf"]
-script = ExtResource("1_ouq44")
-name = "Index Out"
-rule = 0
-finger = 1
-other_finger = 1
-function = SubResource("Resource_sk616")
-
-[sub_resource type="Resource" id="Resource_hjv5u"]
+[sub_resource type="Resource" id="Resource_5lwnk"]
 script = ExtResource("2_kgqxd")
 type = 0
 min = 0.0
@@ -28,15 +11,7 @@ from = 45.0
 to = 25.0
 max = 0.0
 
-[sub_resource type="Resource" id="Resource_v7jj1"]
-script = ExtResource("1_ouq44")
-name = "Index Straight"
-rule = 1
-finger = 1
-other_finger = 0
-function = SubResource("Resource_hjv5u")
-
-[sub_resource type="Resource" id="Resource_1rba7"]
+[sub_resource type="Resource" id="Resource_ni4th"]
 script = ExtResource("2_kgqxd")
 type = 0
 min = 0.0
@@ -44,15 +19,7 @@ from = 90.0
 to = 130.0
 max = 0.0
 
-[sub_resource type="Resource" id="Resource_oa3jo"]
-script = ExtResource("1_ouq44")
-name = "Middle Curled"
-rule = 1
-finger = 2
-other_finger = 0
-function = SubResource("Resource_1rba7")
-
-[sub_resource type="Resource" id="Resource_435ok"]
+[sub_resource type="Resource" id="Resource_ngpot"]
 script = ExtResource("2_kgqxd")
 type = 0
 min = 0.0
@@ -60,15 +27,7 @@ from = 90.0
 to = 130.0
 max = 0.0
 
-[sub_resource type="Resource" id="Resource_de2kr"]
-script = ExtResource("1_ouq44")
-name = "Ring Curled"
-rule = 1
-finger = 3
-other_finger = 0
-function = SubResource("Resource_435ok")
-
-[sub_resource type="Resource" id="Resource_q5taw"]
+[sub_resource type="Resource" id="Resource_kbi8m"]
 script = ExtResource("2_kgqxd")
 type = 0
 min = 0.0
@@ -76,16 +35,20 @@ from = 90.0
 to = 130.0
 max = 0.0
 
-[sub_resource type="Resource" id="Resource_irtiq"]
-script = ExtResource("1_ouq44")
-name = "Pinky Curled"
-rule = 1
-finger = 4
-other_finger = 0
-function = SubResource("Resource_q5taw")
+[sub_resource type="Resource" id="Resource_3xngl"]
+script = ExtResource("2_kgqxd")
+type = 0
+min = 0.0
+from = 40.0
+to = 20.0
+max = 0.0
 
 [resource]
 script = ExtResource("2_fvjog")
 pose_name = "Point"
 threshold = 0.3
-rules = Array[ExtResource("1_ouq44")]([SubResource("Resource_cvryf"), SubResource("Resource_v7jj1"), SubResource("Resource_oa3jo"), SubResource("Resource_de2kr"), SubResource("Resource_irtiq")])
+flexion_index = SubResource("Resource_3xngl")
+curl_index = SubResource("Resource_5lwnk")
+curl_middle = SubResource("Resource_ni4th")
+curl_ring = SubResource("Resource_kbi8m")
+curl_pinky = SubResource("Resource_ngpot")

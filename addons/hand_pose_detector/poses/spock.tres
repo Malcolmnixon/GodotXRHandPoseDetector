@@ -1,170 +1,9 @@
-[gd_resource type="Resource" script_class="HandPose" load_steps=30 format=3 uid="uid://xghyj4mh4av2"]
+[gd_resource type="Resource" script_class="HandPose" load_steps=16 format=3 uid="uid://xghyj4mh4av2"]
 
-[ext_resource type="Script" path="res://addons/hand_pose_detector/hand_pose_rule.gd" id="1_vkfm2"]
 [ext_resource type="Script" path="res://addons/hand_pose_detector/hand_pose.gd" id="2_agcwt"]
 [ext_resource type="Script" path="res://addons/hand_pose_detector/fitness_function.gd" id="2_m5nkn"]
 
-[sub_resource type="Resource" id="Resource_872i4"]
-script = ExtResource("2_m5nkn")
-type = 0
-min = 0.0
-from = 70.0
-to = 50.0
-max = 0.0
-
-[sub_resource type="Resource" id="Resource_1aijm"]
-script = ExtResource("1_vkfm2")
-name = "Thumb Out"
-rule = 0
-finger = 0
-other_finger = 0
-function = SubResource("Resource_872i4")
-
-[sub_resource type="Resource" id="Resource_g6wd7"]
-script = ExtResource("2_m5nkn")
-type = 0
-min = 0.0
-from = 20.0
-to = 10.0
-max = 0.0
-
-[sub_resource type="Resource" id="Resource_qtb6d"]
-script = ExtResource("1_vkfm2")
-name = "Thumb Straight"
-rule = 1
-finger = 0
-other_finger = 0
-function = SubResource("Resource_g6wd7")
-
-[sub_resource type="Resource" id="Resource_yr7el"]
-script = ExtResource("2_m5nkn")
-type = 0
-min = 0.0
-from = 40.0
-to = 30.0
-max = 0.0
-
-[sub_resource type="Resource" id="Resource_4dy62"]
-script = ExtResource("1_vkfm2")
-name = "Index Out"
-rule = 0
-finger = 1
-other_finger = 0
-function = SubResource("Resource_yr7el")
-
-[sub_resource type="Resource" id="Resource_jp6qb"]
-script = ExtResource("2_m5nkn")
-type = 0
-min = 0.0
-from = 20.0
-to = 10.0
-max = 0.0
-
-[sub_resource type="Resource" id="Resource_e00gh"]
-script = ExtResource("1_vkfm2")
-name = "Index Straight"
-rule = 1
-finger = 1
-other_finger = 0
-function = SubResource("Resource_jp6qb")
-
-[sub_resource type="Resource" id="Resource_j360a"]
-script = ExtResource("2_m5nkn")
-type = 0
-min = 0.0
-from = 40.0
-to = 30.0
-max = 0.0
-
-[sub_resource type="Resource" id="Resource_475e0"]
-script = ExtResource("1_vkfm2")
-name = "Middle Out"
-rule = 0
-finger = 2
-other_finger = 0
-function = SubResource("Resource_j360a")
-
-[sub_resource type="Resource" id="Resource_aqohg"]
-script = ExtResource("2_m5nkn")
-type = 0
-min = 0.0
-from = 20.0
-to = 10.0
-max = 0.0
-
-[sub_resource type="Resource" id="Resource_aq4h8"]
-script = ExtResource("1_vkfm2")
-name = "Middle Straight"
-rule = 1
-finger = 2
-other_finger = 0
-function = SubResource("Resource_aqohg")
-
-[sub_resource type="Resource" id="Resource_1v1ww"]
-script = ExtResource("2_m5nkn")
-type = 0
-min = 0.0
-from = 40.0
-to = 30.0
-max = 0.0
-
-[sub_resource type="Resource" id="Resource_jh3h3"]
-script = ExtResource("1_vkfm2")
-name = "Ring Out"
-rule = 0
-finger = 3
-other_finger = 0
-function = SubResource("Resource_1v1ww")
-
-[sub_resource type="Resource" id="Resource_fglah"]
-script = ExtResource("2_m5nkn")
-type = 0
-min = 0.0
-from = 20.0
-to = 10.0
-max = 0.0
-
-[sub_resource type="Resource" id="Resource_ju344"]
-script = ExtResource("1_vkfm2")
-name = "Ring Straight"
-rule = 1
-finger = 3
-other_finger = 0
-function = SubResource("Resource_fglah")
-
-[sub_resource type="Resource" id="Resource_pup22"]
-script = ExtResource("2_m5nkn")
-type = 0
-min = 0.0
-from = 40.0
-to = 30.0
-max = 0.0
-
-[sub_resource type="Resource" id="Resource_45uvj"]
-script = ExtResource("1_vkfm2")
-name = "Pinky Out"
-rule = 0
-finger = 4
-other_finger = 0
-function = SubResource("Resource_pup22")
-
-[sub_resource type="Resource" id="Resource_nwixc"]
-script = ExtResource("2_m5nkn")
-type = 0
-min = 0.0
-from = 20.0
-to = 10.0
-max = 0.0
-
-[sub_resource type="Resource" id="Resource_md1g8"]
-script = ExtResource("1_vkfm2")
-name = "Pinky Straight"
-rule = 1
-finger = 3
-other_finger = 0
-function = SubResource("Resource_nwixc")
-
-[sub_resource type="Resource" id="Resource_mafm4"]
+[sub_resource type="Resource" id="Resource_kwbgf"]
 script = ExtResource("2_m5nkn")
 type = 0
 min = 0.0
@@ -172,15 +11,7 @@ from = 15.0
 to = 8.0
 max = 0.0
 
-[sub_resource type="Resource" id="Resource_sxnbp"]
-script = ExtResource("1_vkfm2")
-name = "Index Middle Touching"
-rule = 2
-finger = 1
-other_finger = 2
-function = SubResource("Resource_mafm4")
-
-[sub_resource type="Resource" id="Resource_3mrlo"]
+[sub_resource type="Resource" id="Resource_cl7xr"]
 script = ExtResource("2_m5nkn")
 type = 0
 min = 0.0
@@ -188,15 +19,7 @@ from = 5.0
 to = 8.0
 max = 0.0
 
-[sub_resource type="Resource" id="Resource_87gc6"]
-script = ExtResource("1_vkfm2")
-name = "Middle Ring Spread"
-rule = 2
-finger = 2
-other_finger = 3
-function = SubResource("Resource_3mrlo")
-
-[sub_resource type="Resource" id="Resource_t1ktt"]
+[sub_resource type="Resource" id="Resource_aow7q"]
 script = ExtResource("2_m5nkn")
 type = 0
 min = 0.0
@@ -204,16 +27,100 @@ from = 15.0
 to = 8.0
 max = 0.0
 
-[sub_resource type="Resource" id="Resource_hhdmr"]
-script = ExtResource("1_vkfm2")
-name = "Ring Pinky Touching"
-rule = 2
-finger = 3
-other_finger = 4
-function = SubResource("Resource_t1ktt")
+[sub_resource type="Resource" id="Resource_fftjn"]
+script = ExtResource("2_m5nkn")
+type = 0
+min = 0.0
+from = 20.0
+to = 10.0
+max = 0.0
+
+[sub_resource type="Resource" id="Resource_5jsnb"]
+script = ExtResource("2_m5nkn")
+type = 0
+min = 0.0
+from = 20.0
+to = 10.0
+max = 0.0
+
+[sub_resource type="Resource" id="Resource_e6jab"]
+script = ExtResource("2_m5nkn")
+type = 0
+min = 0.0
+from = 20.0
+to = 10.0
+max = 0.0
+
+[sub_resource type="Resource" id="Resource_koxyu"]
+script = ExtResource("2_m5nkn")
+type = 0
+min = 0.0
+from = 20.0
+to = 10.0
+max = 0.0
+
+[sub_resource type="Resource" id="Resource_v3608"]
+script = ExtResource("2_m5nkn")
+type = 0
+min = 0.0
+from = 20.0
+to = 10.0
+max = 0.0
+
+[sub_resource type="Resource" id="Resource_vih3q"]
+script = ExtResource("2_m5nkn")
+type = 0
+min = 0.0
+from = 40.0
+to = 30.0
+max = 0.0
+
+[sub_resource type="Resource" id="Resource_s4kcy"]
+script = ExtResource("2_m5nkn")
+type = 0
+min = 0.0
+from = 40.0
+to = 30.0
+max = 0.0
+
+[sub_resource type="Resource" id="Resource_d8otj"]
+script = ExtResource("2_m5nkn")
+type = 0
+min = 0.0
+from = 40.0
+to = 30.0
+max = 0.0
+
+[sub_resource type="Resource" id="Resource_jquxv"]
+script = ExtResource("2_m5nkn")
+type = 0
+min = 0.0
+from = 40.0
+to = 30.0
+max = 0.0
+
+[sub_resource type="Resource" id="Resource_o7ite"]
+script = ExtResource("2_m5nkn")
+type = 0
+min = 0.0
+from = 70.0
+to = 50.0
+max = 0.0
 
 [resource]
 script = ExtResource("2_agcwt")
 pose_name = "Spock"
 threshold = 0.3
-rules = Array[ExtResource("1_vkfm2")]([SubResource("Resource_1aijm"), SubResource("Resource_qtb6d"), SubResource("Resource_4dy62"), SubResource("Resource_e00gh"), SubResource("Resource_475e0"), SubResource("Resource_aq4h8"), SubResource("Resource_jh3h3"), SubResource("Resource_ju344"), SubResource("Resource_45uvj"), SubResource("Resource_md1g8"), SubResource("Resource_sxnbp"), SubResource("Resource_87gc6"), SubResource("Resource_hhdmr")])
+flexion_thumb = SubResource("Resource_o7ite")
+flexion_index = SubResource("Resource_vih3q")
+flexion_middle = SubResource("Resource_s4kcy")
+flexion_ring = SubResource("Resource_jquxv")
+flexion_pinky = SubResource("Resource_d8otj")
+curl_thumb = SubResource("Resource_v3608")
+curl_index = SubResource("Resource_fftjn")
+curl_middle = SubResource("Resource_5jsnb")
+curl_ring = SubResource("Resource_koxyu")
+curl_pinky = SubResource("Resource_e6jab")
+abduction_index_middle = SubResource("Resource_kwbgf")
+abduction_middle_ring = SubResource("Resource_cl7xr")
+abduction_ring_pinky = SubResource("Resource_aow7q")

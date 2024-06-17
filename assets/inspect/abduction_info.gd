@@ -6,10 +6,10 @@ extends Label3D
 # Diagnostic Text Template
 const _DIAGNOSTIC_TEXT = \
 	"Abduction (deg)\n\n" + \
-	"Thumb/Index: {thb_idx}\n" + \
-	"Index/Middle: {idx_mid}\n" + \
-	"Middle/Ring: {mid_rng}\n" + \
-	"Ring/Pinky: {rng_pky}"
+	"Thumb/Index: {abd_thumb}\n" + \
+	"Index/Middle: {abd_index}\n" + \
+	"Middle/Ring: {abd_middle}\n" + \
+	"Ring/Pinky: {abd_ring}"
 
 
 ## Name of the hand pose tracker
@@ -39,12 +39,14 @@ func _process(_delta: float) -> void:
 			return
 
 	# Gather the data
-	var data := {
-		"thb_idx" : int(HandInfo.abduction(tracker, HandInfo.Finger.THUMB, HandInfo.Finger.INDEX)),
-		"idx_mid" : int(HandInfo.abduction(tracker, HandInfo.Finger.INDEX, HandInfo.Finger.MIDDLE)),
-		"mid_rng" : int(HandInfo.abduction(tracker, HandInfo.Finger.MIDDLE, HandInfo.Finger.RING)),
-		"rng_pky" : int(HandInfo.abduction(tracker, HandInfo.Finger.RING, HandInfo.Finger.PINKY))
+	var data := HandPoseData.new()
+	data.update(tracker)
+	var text_data := {
+		"abd_thumb"  : int(data.abd_thumb),
+		"abd_index"  : int(data.abd_index),
+		"abd_middle" : int(data.abd_middle),
+		"abd_ring"   : int(data.abd_ring)
 	}
 
 	# Format the text
-	text = _DIAGNOSTIC_TEXT.format(data)
+	text = _DIAGNOSTIC_TEXT.format(text_data)
