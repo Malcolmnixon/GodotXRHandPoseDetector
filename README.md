@@ -6,7 +6,6 @@
 ![GitHub](https://img.shields.io/github/license/Malcolmnixon/GodotXRHandPoseDetector?style=plastic)
 
 This repository contains a hand pose detector for Godot that detects poses on XRHandTracker sources.
-
 ![Demo Screen Shot](/docs/demo_screen_shot.png)
 
 ## Versions
@@ -29,6 +28,7 @@ The following steps show how to add the Godot XR Hand Pose Detector to a project
 ### XR Hand Tracking Project
 
 Ensure the existing project is configured with XR hand tracking. The demo project and main scene shows how to do this for OpenXR.
+
 ![OpenXR Hand Tracking Scene](/docs/basic_hand_tracking_scene.png)
 
 ### Install Addon
@@ -38,17 +38,23 @@ The addon files need to be copied to the `/addons/hand_pose_detector` folder of 
 ### Add Hand Pose Detectors
 
 Add Hand Pose Detector nodes into the scene - one for each hand.
+
 ![Add Hand Pose Detectors](/docs/add_hand_pose_detectors.png)
 
 Configure the hand pose detectors with the pose-set to detect, and the hand tracker to monitor.
+
 ![Hand Pose Detector Settings](/docs/hand_pose_detector_settings.png)
 
-Connect the hand pose detector signals as desired
+Connect the hand pose detector signals as desired.
+
 ![Hand Pose Detector Signals](/docs/hand_pose_detector_signals.png)
 
 ## Custom Hand Poses
 
+This section describes the process of creatnig custom hand poses. Additionally the [Creating Custom Hand Poses](https://youtu.be/xB1TJXy77fI) video walks through the process.
+
 New hand poses can be made by creating new Hand Pose Resource instances.
+
 ![Hand Pose Resource](/docs/hand_pose_resource.png)
 
 Hand Pose Resources consist of:
@@ -90,6 +96,7 @@ The Range function provides non-zero values in a finite range.
 ## Designing and Tuning
 
 The inspect scene provided in the demo project can be used to inspect the flexion, curl, abduction, and tip-distance of a hand, and can also inspect a selected hand pose to diagnose the fitness of the rules.
+
 ![Inspect Scene](/docs/inspect_scene.png)
 
 ## Licensing
