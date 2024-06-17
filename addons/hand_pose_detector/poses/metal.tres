@@ -1,0 +1,72 @@
+[gd_resource type="Resource" script_class="HandPose" load_steps=10 format=3 uid="uid://c5pg3bqcsep5y"]
+
+[ext_resource type="Script" path="res://addons/hand_pose_detector/fitness_function.gd" id="1_4qd15"]
+[ext_resource type="Script" path="res://addons/hand_pose_detector/hand_pose.gd" id="1_xil5d"]
+
+[sub_resource type="Resource" id="Resource_jg72w"]
+script = ExtResource("1_4qd15")
+type = 0
+min = 0.0
+from = 40.0
+to = 60.0
+max = 0.0
+
+[sub_resource type="Resource" id="Resource_8sca2"]
+script = ExtResource("1_4qd15")
+type = 0
+min = 0.0
+from = 40.0
+to = 60.0
+max = 0.0
+
+[sub_resource type="Resource" id="Resource_gw741"]
+script = ExtResource("1_4qd15")
+type = 0
+min = 0.0
+from = 50.0
+to = 30.0
+max = 0.0
+
+[sub_resource type="Resource" id="Resource_pi16g"]
+script = ExtResource("1_4qd15")
+type = 0
+min = 0.0
+from = 30.0
+to = 40.0
+max = 0.0
+
+[sub_resource type="Resource" id="Resource_ob7e5"]
+script = ExtResource("1_4qd15")
+type = 0
+min = 0.0
+from = 55.0
+to = 35.0
+max = 0.0
+
+[sub_resource type="Resource" id="Resource_5bmfu"]
+script = ExtResource("1_4qd15")
+type = 0
+min = 0.0
+from = 30.0
+to = 40.0
+max = 0.0
+
+[sub_resource type="Resource" id="Resource_h0roc"]
+script = ExtResource("1_4qd15")
+type = 0
+min = 0.0
+from = 60.0
+to = 40.0
+max = 0.0
+
+[resource]
+script = ExtResource("1_xil5d")
+pose_name = "Metal"
+threshold = 0.5
+flexion_thumb = SubResource("Resource_h0roc")
+flexion_index = SubResource("Resource_gw741")
+flexion_middle = SubResource("Resource_pi16g")
+flexion_ring = SubResource("Resource_5bmfu")
+flexion_pinky = SubResource("Resource_ob7e5")
+curl_middle = SubResource("Resource_jg72w")
+curl_ring = SubResource("Resource_8sca2")
