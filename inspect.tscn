@@ -323,7 +323,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3.2, -3)
 [node name="PoseInfo" parent="." instance=ExtResource("10_pbatn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -3)
 pose = ExtResource("11_1qjtv")
-tracker_name = "/user/hand_tracker/left"
 
 [editable path="XROrigin3D/LeftTrackedHand/LeftHandHumanoid"]
 [editable path="XROrigin3D/RightTrackedHand/RightHandHumanoid2"]

@@ -1,7 +1,16 @@
-[gd_resource type="Resource" script_class="HandPose" load_steps=9 format=3 uid="uid://sy66yqr1xila"]
+[gd_resource type="Resource" script_class="HandPose" load_steps=16 format=3 uid="uid://sy66yqr1xila"]
 
 [ext_resource type="Script" path="res://addons/hand_pose_detector/hand_pose_rule.gd" id="1_7tedi"]
 [ext_resource type="Script" path="res://addons/hand_pose_detector/hand_pose.gd" id="2_khw5p"]
+[ext_resource type="Script" path="res://addons/hand_pose_detector/fitness_function.gd" id="2_p44rq"]
+
+[sub_resource type="Resource" id="Resource_033ia"]
+script = ExtResource("2_p44rq")
+type = 0
+min = 0.0
+from = 50.0
+to = 20.0
+max = 0.0
 
 [sub_resource type="Resource" id="Resource_w4chp"]
 script = ExtResource("1_7tedi")
@@ -9,14 +18,15 @@ name = "Thumb Up"
 rule = 0
 finger = 0
 other_finger = 0
-range_min = -1000.0
-range_lower = -999.0
-range_upper = 20.0
-range_max = 50.0
-range_min = -1000.0
-range_lower = -999.0
-range_upper = 20.0
-range_max = 50.0
+function = SubResource("Resource_033ia")
+
+[sub_resource type="Resource" id="Resource_pufeb"]
+script = ExtResource("2_p44rq")
+type = 0
+min = 0.0
+from = 25.0
+to = 10.0
+max = 0.0
 
 [sub_resource type="Resource" id="Resource_gygof"]
 script = ExtResource("1_7tedi")
@@ -24,14 +34,15 @@ name = "Thumb Straight"
 rule = 1
 finger = 0
 other_finger = 0
-range_min = -1000.0
-range_lower = -999.0
-range_upper = 10.0
-range_max = 25.0
-range_min = -1000.0
-range_lower = -999.0
-range_upper = 10.0
-range_max = 25.0
+function = SubResource("Resource_pufeb")
+
+[sub_resource type="Resource" id="Resource_8yiy8"]
+script = ExtResource("2_p44rq")
+type = 0
+min = 0.0
+from = 70.0
+to = 120.0
+max = 0.0
 
 [sub_resource type="Resource" id="Resource_jvks8"]
 script = ExtResource("1_7tedi")
@@ -39,14 +50,15 @@ name = "Index Curled"
 rule = 1
 finger = 1
 other_finger = 0
-range_min = 70.0
-range_lower = 120.0
-range_upper = 999.0
-range_max = 1000.0
-range_min = 70.0
-range_lower = 120.0
-range_upper = 999.0
-range_max = 1000.0
+function = SubResource("Resource_8yiy8")
+
+[sub_resource type="Resource" id="Resource_nggox"]
+script = ExtResource("2_p44rq")
+type = 0
+min = 0.0
+from = 70.0
+to = 120.0
+max = 0.0
 
 [sub_resource type="Resource" id="Resource_piauo"]
 script = ExtResource("1_7tedi")
@@ -54,14 +66,15 @@ name = "Middle Curled"
 rule = 1
 finger = 2
 other_finger = 0
-range_min = 70.0
-range_lower = 120.0
-range_upper = 999.0
-range_max = 1000.0
-range_min = 70.0
-range_lower = 120.0
-range_upper = 999.0
-range_max = 1000.0
+function = SubResource("Resource_nggox")
+
+[sub_resource type="Resource" id="Resource_g6n21"]
+script = ExtResource("2_p44rq")
+type = 0
+min = 0.0
+from = 70.0
+to = 120.0
+max = 0.0
 
 [sub_resource type="Resource" id="Resource_vuao2"]
 script = ExtResource("1_7tedi")
@@ -69,14 +82,15 @@ name = "Ring Curled"
 rule = 1
 finger = 3
 other_finger = 0
-range_min = 70.0
-range_lower = 120.0
-range_upper = 999.0
-range_max = 1000.0
-range_min = 70.0
-range_lower = 120.0
-range_upper = 999.0
-range_max = 1000.0
+function = SubResource("Resource_g6n21")
+
+[sub_resource type="Resource" id="Resource_8jsov"]
+script = ExtResource("2_p44rq")
+type = 0
+min = 0.0
+from = 70.0
+to = 120.0
+max = 0.0
 
 [sub_resource type="Resource" id="Resource_wu8ie"]
 script = ExtResource("1_7tedi")
@@ -84,14 +98,7 @@ name = "Pinky Curled"
 rule = 1
 finger = 4
 other_finger = 0
-range_min = 70.0
-range_lower = 120.0
-range_upper = 999.0
-range_max = 1000.0
-range_min = 70.0
-range_lower = 120.0
-range_upper = 999.0
-range_max = 1000.0
+function = SubResource("Resource_8jsov")
 
 [resource]
 script = ExtResource("2_khw5p")

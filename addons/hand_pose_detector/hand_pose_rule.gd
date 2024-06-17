@@ -32,17 +32,8 @@ enum RuleType {
 ## Hand Pose Other Finger (for abduction / tip-distance)
 @export_storage var other_finger : HandInfo.Finger
 
-## Minimum valid angle/position
-@export_storage var range_min : float
-
-## Lower angle/position
-@export_storage var range_lower : float
-
-## Upper angle/position
-@export_storage var range_upper : float
-
-## Maximum valid angle/position
-@export_storage var range_max : float
+## Fitness Function
+@export var function : FitnessFunction = FitnessFunction.new()
 
 
 # Customize the property lists
@@ -59,33 +50,6 @@ func _get_property_list() -> Array[Dictionary]:
 			"hint" : PROPERTY_HINT_ENUM,
 			"hint_string" : "Thumb,Index,Middle,Ring,Pinky"
 		})
-
-	# Add the four range values
-	props.append({
-		"name" : "Range",
-		"type" : TYPE_NIL,
-		"usage" : PROPERTY_USAGE_GROUP
-	})
-	props.append({
-		"name" : "range_min",
-		"type" : TYPE_FLOAT,
-		"usage" : PROPERTY_USAGE_DEFAULT
-	})
-	props.append({
-		"name" : "range_lower",
-		"type" : TYPE_FLOAT,
-		"usage" : PROPERTY_USAGE_DEFAULT
-	})
-	props.append({
-		"name" : "range_upper",
-		"type" : TYPE_FLOAT,
-		"usage" : PROPERTY_USAGE_DEFAULT
-	})
-	props.append({
-		"name" : "range_max",
-		"type" : TYPE_FLOAT,
-		"usage" : PROPERTY_USAGE_DEFAULT
-	})
 
 	# Return the properties
 	return props
@@ -109,34 +73,22 @@ func get_fitness(hand : XRHandTracker) -> float:
 		_:
 			return 0
 
-	# Convert measurement to fitness over the 5 segments
-	if measure < range_min:		# Below Min
-		return 0.0
-	if measure < range_lower:	# Min to Lower S-curve
-		return smoothstep(range_min, range_lower, measure)
-	if measure < range_upper:	# Lower to Upper
-		return 1.0
-	if measure < range_max:		# Upper to Max S-curve
-		return smoothstep(range_max, range_upper, measure)
-	return 0.0					# Above Max
+	return function.calculate(measure)
 
 
 ## Returns configuration warnings associated with this rule.
 func get_warnings() -> Array[String]:
+	# Create the warnings array
 	var warnings : Array[String] = []
 
+	# Add warnings for the rule
 	if rule == RuleType.ABDUCTION and finger == other_finger:
 		warnings.append("Abduction must specify different fingers")
 	if rule == RuleType.TIP_DISTANCE and finger == other_finger:
 		warnings.append("Tip-Distance must specify different fingers")
-	if range_min > range_lower:
-		warnings.append("Range order error: range_min > range_lower")
-	if range_lower > range_upper:
-		warnings.append("Range order error: range_lower > range_upper")
-	if range_upper > range_max:
-		warnings.append("Range order error: range_upper > range_max")
-	if range_min == range_max:
-		warnings.append("Zero range specified")
+	warnings.append_array(function.get_warnings())
+
+	# Return the warnings
 	return warnings
 
 

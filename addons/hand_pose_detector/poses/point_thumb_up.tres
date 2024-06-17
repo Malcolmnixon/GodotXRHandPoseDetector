@@ -1,7 +1,16 @@
-[gd_resource type="Resource" script_class="HandPose" load_steps=10 format=3 uid="uid://ra50ueubhepa"]
+[gd_resource type="Resource" script_class="HandPose" load_steps=18 format=3 uid="uid://ra50ueubhepa"]
 
 [ext_resource type="Script" path="res://addons/hand_pose_detector/hand_pose_rule.gd" id="1_10rs1"]
+[ext_resource type="Script" path="res://addons/hand_pose_detector/fitness_function.gd" id="2_0x328"]
 [ext_resource type="Script" path="res://addons/hand_pose_detector/hand_pose.gd" id="2_vgihw"]
+
+[sub_resource type="Resource" id="Resource_o1vcv"]
+script = ExtResource("2_0x328")
+type = 0
+min = 0.0
+from = 40.0
+to = 20.0
+max = 0.0
 
 [sub_resource type="Resource" id="Resource_jg8s8"]
 script = ExtResource("1_10rs1")
@@ -9,14 +18,15 @@ name = "Thumb Up"
 rule = 0
 finger = 0
 other_finger = 0
-range_min = -1000.0
-range_lower = -999.0
-range_upper = 20.0
-range_max = 40.0
-range_min = -1000.0
-range_lower = -999.0
-range_upper = 20.0
-range_max = 40.0
+function = SubResource("Resource_o1vcv")
+
+[sub_resource type="Resource" id="Resource_kb4gy"]
+script = ExtResource("2_0x328")
+type = 0
+min = 0.0
+from = 20.0
+to = 30.0
+max = 0.0
 
 [sub_resource type="Resource" id="Resource_tqn6e"]
 script = ExtResource("1_10rs1")
@@ -24,15 +34,15 @@ name = "Thumb Out"
 rule = 2
 finger = 0
 other_finger = 1
-range_min = 20.0
-range_lower = 30.0
-range_upper = 999.0
-range_max = 1000.0
-other_finger = 1
-range_min = 20.0
-range_lower = 30.0
-range_upper = 999.0
-range_max = 1000.0
+function = SubResource("Resource_kb4gy")
+
+[sub_resource type="Resource" id="Resource_8qi77"]
+script = ExtResource("2_0x328")
+type = 0
+min = 0.0
+from = 40.0
+to = 20.0
+max = 0.0
 
 [sub_resource type="Resource" id="Resource_cvryf"]
 script = ExtResource("1_10rs1")
@@ -40,14 +50,15 @@ name = "Index Out"
 rule = 0
 finger = 1
 other_finger = 1
-range_min = -1000.0
-range_lower = -999.0
-range_upper = 20.0
-range_max = 40.0
-range_min = -1000.0
-range_lower = -999.0
-range_upper = 20.0
-range_max = 40.0
+function = SubResource("Resource_8qi77")
+
+[sub_resource type="Resource" id="Resource_va38c"]
+script = ExtResource("2_0x328")
+type = 0
+min = 0.0
+from = 45.0
+to = 25.0
+max = 0.0
 
 [sub_resource type="Resource" id="Resource_v7jj1"]
 script = ExtResource("1_10rs1")
@@ -55,14 +66,15 @@ name = "Index Straight"
 rule = 1
 finger = 1
 other_finger = 0
-range_min = -1000.0
-range_lower = -999.0
-range_upper = 25.0
-range_max = 45.0
-range_min = -1000.0
-range_lower = -999.0
-range_upper = 25.0
-range_max = 45.0
+function = SubResource("Resource_va38c")
+
+[sub_resource type="Resource" id="Resource_sdqnv"]
+script = ExtResource("2_0x328")
+type = 0
+min = 0.0
+from = 90.0
+to = 130.0
+max = 0.0
 
 [sub_resource type="Resource" id="Resource_oa3jo"]
 script = ExtResource("1_10rs1")
@@ -70,14 +82,15 @@ name = "Middle Curled"
 rule = 1
 finger = 2
 other_finger = 0
-range_min = 90.0
-range_lower = 130.0
-range_upper = 999.0
-range_max = 1000.0
-range_min = 90.0
-range_lower = 130.0
-range_upper = 999.0
-range_max = 1000.0
+function = SubResource("Resource_sdqnv")
+
+[sub_resource type="Resource" id="Resource_fcd02"]
+script = ExtResource("2_0x328")
+type = 0
+min = 0.0
+from = 90.0
+to = 130.0
+max = 0.0
 
 [sub_resource type="Resource" id="Resource_de2kr"]
 script = ExtResource("1_10rs1")
@@ -85,14 +98,15 @@ name = "Ring Curled"
 rule = 1
 finger = 3
 other_finger = 0
-range_min = 90.0
-range_lower = 130.0
-range_upper = 999.0
-range_max = 1000.0
-range_min = 90.0
-range_lower = 130.0
-range_upper = 999.0
-range_max = 1000.0
+function = SubResource("Resource_fcd02")
+
+[sub_resource type="Resource" id="Resource_7xfjt"]
+script = ExtResource("2_0x328")
+type = 0
+min = 0.0
+from = 90.0
+to = 130.0
+max = 0.0
 
 [sub_resource type="Resource" id="Resource_irtiq"]
 script = ExtResource("1_10rs1")
@@ -100,14 +114,7 @@ name = "Pinky Curled"
 rule = 1
 finger = 4
 other_finger = 0
-range_min = 90.0
-range_lower = 130.0
-range_upper = 999.0
-range_max = 1000.0
-range_min = 90.0
-range_lower = 130.0
-range_upper = 999.0
-range_max = 1000.0
+function = SubResource("Resource_7xfjt")
 
 [resource]
 script = ExtResource("2_vgihw")

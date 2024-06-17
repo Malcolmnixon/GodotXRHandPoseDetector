@@ -1,7 +1,16 @@
-[gd_resource type="Resource" script_class="HandPose" load_steps=11 format=3 uid="uid://dgl2b6ftbpnrx"]
+[gd_resource type="Resource" script_class="HandPose" load_steps=20 format=3 uid="uid://dgl2b6ftbpnrx"]
 
 [ext_resource type="Script" path="res://addons/hand_pose_detector/hand_pose_rule.gd" id="1_miqci"]
+[ext_resource type="Script" path="res://addons/hand_pose_detector/fitness_function.gd" id="2_da60p"]
 [ext_resource type="Script" path="res://addons/hand_pose_detector/hand_pose.gd" id="2_k3pua"]
+
+[sub_resource type="Resource" id="Resource_8lfwi"]
+script = ExtResource("2_da60p")
+type = 0
+min = 0.0
+from = 80.0
+to = 100.0
+max = 0.0
 
 [sub_resource type="Resource" id="Resource_au8n7"]
 script = ExtResource("1_miqci")
@@ -9,14 +18,15 @@ name = "Thumb In"
 rule = 0
 finger = 0
 other_finger = 0
-range_min = 80.0
-range_lower = 100.0
-range_upper = 999.0
-range_max = 1000.0
-range_min = 80.0
-range_lower = 100.0
-range_upper = 999.0
-range_max = 1000.0
+function = SubResource("Resource_8lfwi")
+
+[sub_resource type="Resource" id="Resource_hkhlh"]
+script = ExtResource("2_da60p")
+type = 0
+min = 0.0
+from = 45.0
+to = 35.0
+max = 0.0
 
 [sub_resource type="Resource" id="Resource_ee3sr"]
 script = ExtResource("1_miqci")
@@ -24,14 +34,15 @@ name = "Index Out"
 rule = 0
 finger = 1
 other_finger = 0
-range_min = -1000.0
-range_lower = -999.0
-range_upper = 35.0
-range_max = 45.0
-range_min = -1000.0
-range_lower = -999.0
-range_upper = 35.0
-range_max = 45.0
+function = SubResource("Resource_hkhlh")
+
+[sub_resource type="Resource" id="Resource_c3ldn"]
+script = ExtResource("2_da60p")
+type = 0
+min = 0.0
+from = 45.0
+to = 35.0
+max = 0.0
 
 [sub_resource type="Resource" id="Resource_soirk"]
 script = ExtResource("1_miqci")
@@ -39,14 +50,15 @@ name = "Middle Out"
 rule = 0
 finger = 2
 other_finger = 0
-range_min = -1000.0
-range_lower = -999.0
-range_upper = 35.0
-range_max = 45.0
-range_min = -1000.0
-range_lower = -999.0
-range_upper = 35.0
-range_max = 45.0
+function = SubResource("Resource_c3ldn")
+
+[sub_resource type="Resource" id="Resource_gfdri"]
+script = ExtResource("2_da60p")
+type = 0
+min = 0.0
+from = 30.0
+to = 40.0
+max = 0.0
 
 [sub_resource type="Resource" id="Resource_bit2v"]
 script = ExtResource("1_miqci")
@@ -54,14 +66,15 @@ name = "Ring In"
 rule = 0
 finger = 3
 other_finger = 0
-range_min = 30.0
-range_lower = 40.0
-range_upper = 999.0
-range_max = 1000.0
-range_min = 30.0
-range_lower = 40.0
-range_upper = 999.0
-range_max = 1000.0
+function = SubResource("Resource_gfdri")
+
+[sub_resource type="Resource" id="Resource_7lpn1"]
+script = ExtResource("2_da60p")
+type = 0
+min = 0.0
+from = 30.0
+to = 40.0
+max = 0.0
 
 [sub_resource type="Resource" id="Resource_2sqse"]
 script = ExtResource("1_miqci")
@@ -69,14 +82,15 @@ name = "Pinky In"
 rule = 0
 finger = 4
 other_finger = 0
-range_min = 30.0
-range_lower = 40.0
-range_upper = 999.0
-range_max = 1000.0
-range_min = 30.0
-range_lower = 40.0
-range_upper = 999.0
-range_max = 1000.0
+function = SubResource("Resource_7lpn1")
+
+[sub_resource type="Resource" id="Resource_6aics"]
+script = ExtResource("2_da60p")
+type = 0
+min = 0.0
+from = 45.0
+to = 35.0
+max = 0.0
 
 [sub_resource type="Resource" id="Resource_gejsd"]
 script = ExtResource("1_miqci")
@@ -84,14 +98,15 @@ name = "Index Straight"
 rule = 1
 finger = 1
 other_finger = 0
-range_min = -1000.0
-range_lower = -999.0
-range_upper = 30.0
-range_max = 45.0
-range_min = -1000.0
-range_lower = -999.0
-range_upper = 30.0
-range_max = 45.0
+function = SubResource("Resource_6aics")
+
+[sub_resource type="Resource" id="Resource_adfxe"]
+script = ExtResource("2_da60p")
+type = 0
+min = 0.0
+from = 45.0
+to = 35.0
+max = 0.0
 
 [sub_resource type="Resource" id="Resource_w3do5"]
 script = ExtResource("1_miqci")
@@ -99,14 +114,15 @@ name = "Middle Straight"
 rule = 1
 finger = 2
 other_finger = 0
-range_min = -1000.0
-range_lower = -999.0
-range_upper = 30.0
-range_max = 45.0
-range_min = -1000.0
-range_lower = -999.0
-range_upper = 30.0
-range_max = 45.0
+function = SubResource("Resource_adfxe")
+
+[sub_resource type="Resource" id="Resource_pef3p"]
+script = ExtResource("2_da60p")
+type = 0
+min = 0.0
+from = 5.0
+to = 10.0
+max = 0.0
 
 [sub_resource type="Resource" id="Resource_ngo2k"]
 script = ExtResource("1_miqci")
@@ -114,15 +130,7 @@ name = "Index Middle Spread"
 rule = 2
 finger = 1
 other_finger = 2
-range_min = 5.0
-range_lower = 10.0
-range_upper = 999.0
-range_max = 999.0
-other_finger = 2
-range_min = 5.0
-range_lower = 10.0
-range_upper = 999.0
-range_max = 999.0
+function = SubResource("Resource_pef3p")
 
 [resource]
 script = ExtResource("2_k3pua")
