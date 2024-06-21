@@ -24,7 +24,7 @@ signal pose_ended(p_name : String)
 ## Name of the hand pose tracker
 @export var tracker_name : String = "/user/hand_tracker/left"
 
-# Current hand tracker
+## Current hand tracker
 var tracker : XRHandTracker
 
 # Current hand pose data
