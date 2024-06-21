@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bh8isvqs258cp"]
+
+[ext_resource type="Script" path="res://addons/hand_pose_detector/hand_pose_controller.gd" id="1_peu0g"]
+
+[node name="HandPoseController" type="Node"]
+script = ExtResource("1_peu0g")
+tracker_name = null
+pose_name = null
