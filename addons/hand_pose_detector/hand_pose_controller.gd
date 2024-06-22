@@ -8,13 +8,60 @@ extends Node
 ## This script creates an XRControllerTracker moved by an associated
 ## HandPoseDetector, and capable of generating XR Input Actions in response
 ## to detected hand poses.
+##
+## The XRControllerTracker will have a "default" pose whose position is based
+## on the tracked hand and the selected pose_type.
+
+
+## Pose Type
+enum PoseType {
+	SKELETON,	## Skeleton pose (palm pose)
+	AIM,		## Aim pose (aiming pose)
+	GRIP		## Grip pose (gripping pose)
+}
+
+# Table of left-hand pose transforms by PoseType
+const _POSE_TRANSFORMS_LEFT : Array[Transform3D] = [
+	# Skeleton-pose (identity)
+	Transform3D(
+		Basis.IDENTITY,
+		Vector3.ZERO),
+
+	# Aim pose - see OpenXR specification
+	Transform3D(
+		Basis(Quaternion(0.4304593, -0.5609855, 0.4304593, 0.5609855)),
+		Vector3(-0.03, 0.08, 0.025)),
+
+	# Grip pose - see OpenXR specification
+	Transform3D(
+		Basis(Quaternion(0.6408564, -0.2988362, 0.6408564, 0.2988362)),
+		Vector3(0.0, 0.0, 0.025))
+]
+
+# Table of right-hand pose transforms by PoseType
+const _POSE_TRANSFORMS_RIGHT : Array[Transform3D] = [
+	# Skeleton-pose (identity)
+	Transform3D(
+		Basis.IDENTITY,
+		Vector3.ZERO),
+
+	# Aim pose - see OpenXR specification
+	Transform3D(
+		Basis(Quaternion(0.4304593, 0.5609855, -0.4304593, 0.5609855)),
+		Vector3(0.03, 0.08, 0.025)),
+
+	# Grip pose - see OpenXR specification
+	Transform3D(
+		Basis(Quaternion(-0.6408564, -0.2988362, 0.6408564, -0.2988362)),
+		Vector3(0.0, 0.0, 0.025))
+]
 
 
 ## Name for the virtual controller tracker
 @export var tracker_name : String = "/user/hand_pose_controller/left"
 
-## Pose name
-@export var pose_name : String = &"default"
+## Pose type
+@export var pose_type : PoseType = PoseType.SKELETON
 
 ## Hand poses generating boolean values
 @export var action_set : HandPoseActionSet
@@ -56,17 +103,33 @@ func _process(_delta: float) -> void:
 	if not pose_detector.tracker or not tracker:
 		return
 
-	# Get the tracker pose
-	var pose := pose_detector.tracker.get_pose(pose_name)
+	# Get the hand tracker pose
+	var pose := pose_detector.tracker.get_pose(&"default")
 	if not pose:
 		return
 
+	# Get the conversion transform
+	var hand := pose_detector.tracker.hand
+
+	# Get the conversion transform
+	var conv_xform : Transform3D
+	if hand == XRPositionalTracker.TrackerHand.TRACKER_HAND_LEFT:
+		conv_xform = _POSE_TRANSFORMS_LEFT[pose_type]
+	else:
+		conv_xform = _POSE_TRANSFORMS_RIGHT[pose_type]
+
+	# Apply conversion to pose components
+	var pose_transform := pose.transform * conv_xform
+	var pose_linear := pose.linear_velocity * conv_xform.basis
+	var pose_angular := _rotate_angular_velocity(pose.angular_velocity, conv_xform.basis)
+
 	# Update the controller tracker pose
+	tracker.hand = hand
 	tracker.set_pose(
 		pose.name,
-		pose.transform,
-		pose.linear_velocity,
-		pose.angular_velocity,
+		pose_transform,
+		pose_linear,
+		pose_angular,
 		pose.tracking_confidence)
 
 
@@ -84,10 +147,6 @@ func _get_configuration_warnings() -> PackedStringArray:
 	# Verify tracker name is set
 	if tracker_name == "":
 		warnings.append("Tracker name not set")
-
-	# Verify pose name is set
-	if pose_name == "":
-		warnings.append("Pose name not set")
 
 	# Verify parent pose
 	var parent_pose_detector := get_parent() as HandPoseDetector
@@ -132,3 +191,22 @@ func _pose_ended(p_name : String) -> void:
 		tracker.set_input(action.action_name, false)
 	else:
 		tracker.set_input(action.action_name, 0.0)
+
+
+# Returns an angular velocity rotated by the given basis matrix.
+static func _rotate_angular_velocity(vel : Vector3, basis : Basis) -> Vector3:
+	# Get the angular velocity length
+	var len := vel.length()
+	if is_zero_approx(len):
+		return Vector3.ZERO
+
+	# Normalize the angular velocity
+	vel /= len
+
+	# Rotate the angular velocity using quaternion composition
+	var vel_quat := Quaternion.from_euler(vel)
+	vel_quat *= basis.get_rotation_quaternion()
+	vel = vel_quat.get_euler()
+
+	# Scale the angular velocity back to the appropriate magnitude
+	return vel * len
