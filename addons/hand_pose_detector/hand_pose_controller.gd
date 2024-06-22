@@ -99,7 +99,7 @@ func _get_configuration_warnings() -> PackedStringArray:
 
 
 # Handle start of pose
-func _pose_started(p_name : String, _fitness : float) -> void:
+func _pose_started(p_name : String) -> void:
 	# Skip if no tracker or action set
 	if not tracker or not action_set:
 		return

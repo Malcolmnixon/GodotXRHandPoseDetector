@@ -16,13 +16,13 @@ extends Resource
 ## Returns the best pose for the specified [param hand].
 func find_pose(hand : HandPoseData) -> Dictionary:
 	# Search for the best pose
-	var best_pose := ""
-	var best_fitness := 0.0
+	var best_pose : HandPose = null
+	var best_fitness : float = 0.0
 	for p in poses:
 		var f := p.get_fitness(hand)
 		if f > best_fitness:
+			best_pose = p
 			best_fitness = f
-			best_pose = p.pose_name
 
 	# Return the best pose
 	return {

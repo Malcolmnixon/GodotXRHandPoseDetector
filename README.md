@@ -67,6 +67,8 @@ New hand poses can be made by creating new Hand Pose Resource instances.
 Hand Pose Resources consist of:
 * A Pose Name (reported in the pose detector signals)
 * A Threshold (a minimal fitness threshold to report the pose)
+* A Hold Time (a debounce time necessary to register the pose)
+* A Release Time (a debounce time necessary to release the pose)
 * A set of fitness functions to apply to each pose component
 
 
@@ -106,7 +108,7 @@ The Range function provides non-zero values in a finite range.
 
 ## Designing and Tuning
 
-The inspect scene provided in the demo project can be used to inspect the flexion, curl, abduction, and tip-distance of a hand, and can also inspect a selected hand pose to diagnose the fitness of the rules.
+The inspect scene provided in the demo project can be used to inspect the flexion, curl, abduction, and tip-distance of a hand, and can also inspect a selected hand pose to diagnose the fitness of each component.
 
 ![Inspect Scene](/docs/inspect_scene.png)
 
