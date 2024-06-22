@@ -72,10 +72,8 @@ vertical_alignment = 0
 
 [connection signal="pose_ended" from="XROrigin3D/LeftTrackedHand/LeftHandPose" to="." method="_on_left_hand_pose_ended"]
 [connection signal="pose_started" from="XROrigin3D/LeftTrackedHand/LeftHandPose" to="." method="_on_left_hand_pose_started"]
-[connection signal="pose_update" from="XROrigin3D/LeftTrackedHand/LeftHandPose" to="." method="_on_left_hand_pose_update"]
 [connection signal="pose_ended" from="XROrigin3D/RightTrackedHand/RightHandPose" to="." method="_on_right_hand_pose_ended"]
 [connection signal="pose_started" from="XROrigin3D/RightTrackedHand/RightHandPose" to="." method="_on_right_hand_pose_started"]
-[connection signal="pose_update" from="XROrigin3D/RightTrackedHand/RightHandPose" to="." method="_on_right_hand_pose_update"]
 
 [editable path="XROrigin3D/LeftTrackedHand/LeftHandHumanoid"]
 [editable path="XROrigin3D/RightTrackedHand/RightHandHumanoid"]

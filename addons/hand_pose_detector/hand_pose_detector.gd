@@ -9,10 +9,7 @@ extends Node
 
 
 ## Signal reported when a hand pose starts
-signal pose_started(p_name : String, p_fitness : float)
-
-## Signal reported while a hand pose is in effect
-signal pose_update(p_name : String, p_fitness : float)
+signal pose_started(p_name : String)
 
 ## Signal reported when a hand pose ends
 signal pose_ended(p_name : String)
@@ -31,7 +28,16 @@ var tracker : XRHandTracker
 var _current_data : HandPoseData = HandPoseData.new()
 
 # Current hand pose
-var _current_pose : String = ""
+var _current_pose : HandPose
+
+# Current pose hold
+var _current_hold : float = 0.0
+
+# New hand pose
+var _new_pose : HandPose
+
+# New pose hold
+var _new_hold : float = 0.0
 
 
 # Customize the properties
@@ -42,7 +48,7 @@ func _validate_property(property: Dictionary) -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	# Skip when running in the engine
 	if Engine.is_editor_hint():
 		return
@@ -57,24 +63,52 @@ func _process(_delta: float) -> void:
 		if not tracker:
 			return
 
+	# Save the active pose before updates (to report changes)
+	var active_pos := _current_pose
+
 	# Find the pose
 	_current_data.update(tracker)
 	var pose_match := hand_pose_set.find_pose(_current_data)
-	var pose : String = pose_match.pose
+	var pose : HandPose = pose_match.pose
 	var fitness : float = pose_match.fitness
 
-	# Handle pose changing
-	if pose != _current_pose:
-		# Report end of the current pose
-		if _current_pose != "":
-			pose_ended.emit(_current_pose)
+	# Manage current pose
+	if _current_pose:
+		# Test if we detect the current pose
+		if pose == _current_pose:
+			# Restore hold on current pose
+			_current_hold = 1.0
+		else:
+			# Decay hold on current pose
+			_current_hold -= delta / _current_pose.release_time
+			if _current_hold <= 0.0:
+				# Current pose lost
+				_current_hold = 0.0
+				_current_pose = null
 
-		# Report start of the new pose
-		if pose != "":
-			pose_started.emit(pose, fitness)
+	# Handle ramp of new pose
+	if pose != _new_pose:
+		# New pose detected
+		_new_pose = pose
+		_new_hold = 0.0
+	elif _new_pose:
+		# Ramp hold on new pose
+		_new_hold += delta / _new_pose.hold_time
+		if _new_hold >= 1.0:
+			# New pose "ready"
+			_new_hold = 1.0
+			if not _current_pose:
+				# No current pose, transition to new pose
+				_current_pose = _new_pose
+				_current_hold = 1.0
 
-		# Save the updated pose
-		_current_pose = pose
-	elif _current_pose != "":
-		# Report update of existing pose
-		pose_update.emit(_current_pose, fitness)
+	# Detect change in active pose
+	if _current_pose != active_pos:
+		# Report loss of old pose
+		if active_pos:
+			pose_ended.emit(active_pos.pose_name)
+
+		# Report start of new pose
+		active_pos = _current_pose
+		if active_pos:
+			pose_started.emit(active_pos.pose_name)

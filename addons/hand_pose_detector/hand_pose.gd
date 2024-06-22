@@ -15,6 +15,12 @@ extends Resource
 ## Detection threshold
 @export_range(0.0, 1.0) var threshold : float = 0.5
 
+## Hold time before pose is detected
+@export_range(0.01, 1.0) var hold_time : float = 0.2
+
+## Release time before pose is lost
+@export_range(0.01, 1.0) var release_time : float = 0.2
+
 # Flexion group
 @export_group("Flexion", "flexion_")
 
