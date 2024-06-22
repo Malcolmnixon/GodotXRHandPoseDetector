@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dabmoo0spa6vg"
-path="res://.godot/imported/RightHandHumanoid.gltf-9b0df2ce88fbae3fc911bc06520ecfc9.scn"
+uid="uid://cjcehqrfoxav3"
+path="res://.godot/imported/LeftHandHumanoid.gltf-ad60a3b416a0e40b4db49f7b2b5b2621.scn"
 
 [deps]
 
-source_file="res://assets/gltf/RightHandHumanoid.gltf"
-dest_files=["res://.godot/imported/RightHandHumanoid.gltf-9b0df2ce88fbae3fc911bc06520ecfc9.scn"]
+source_file="res://addons/hand_pose_detector/hands/LeftHandHumanoid.gltf"
+dest_files=["res://.godot/imported/LeftHandHumanoid.gltf-ad60a3b416a0e40b4db49f7b2b5b2621.scn"]
 
 [params]
 
@@ -31,7 +31,14 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
-_subresources={}
+_subresources={
+"nodes": {
+"PATH:LeftHandHumanoid/Skeleton3D": {
+"rest_pose/external_animation_library": null,
+"retarget/bone_map": null
+}
+}
+}
 fbx/importer=0
 fbx/allow_geometry_helper_nodes=false
 fbx/embedded_image_handling=1
