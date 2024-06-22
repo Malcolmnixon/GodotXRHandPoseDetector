@@ -1,10 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://y0j46ct8rv7f"]
+[gd_scene load_steps=18 format=3 uid="uid://y0j46ct8rv7f"]
 
 [ext_resource type="Script" path="res://demo.gd" id="1_3t01i"]
 [ext_resource type="PackedScene" uid="uid://cjcehqrfoxav3" path="res://assets/gltf/LeftHandHumanoid.gltf" id="2_qj6xm"]
 [ext_resource type="PackedScene" uid="uid://df5hynbooj1uj" path="res://addons/hand_pose_detector/hand_pose_detector.tscn" id="3_sea3p"]
 [ext_resource type="Resource" uid="uid://ckjd0xa2a240p" path="res://addons/hand_pose_detector/poses/standard_pose_set.tres" id="4_aw253"]
 [ext_resource type="PackedScene" uid="uid://dabmoo0spa6vg" path="res://assets/gltf/RightHandHumanoid.gltf" id="4_uvuof"]
+[ext_resource type="PackedScene" uid="uid://bh8isvqs258cp" path="res://addons/hand_pose_detector/hand_pose_controller.tscn" id="5_0abgo"]
+[ext_resource type="Script" path="res://addons/hand_pose_detector/hand_pose_action.gd" id="7_ownji"]
+[ext_resource type="Resource" uid="uid://ra50ueubhepa" path="res://addons/hand_pose_detector/poses/point_thumb_up.tres" id="8_pcf64"]
+[ext_resource type="Script" path="res://addons/hand_pose_detector/hand_pose_action_set.gd" id="9_ux58f"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gp80n"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -17,6 +21,40 @@ sky_material = SubResource("ProceduralSkyMaterial_gp80n")
 background_mode = 2
 sky = SubResource("Sky_wwtaq")
 tonemap_mode = 2
+
+[sub_resource type="Resource" id="Resource_0u7th"]
+script = ExtResource("7_ownji")
+pose = ExtResource("8_pcf64")
+action_type = 0
+action_name = "point_thumb_up"
+
+[sub_resource type="Resource" id="Resource_0mgap"]
+script = ExtResource("9_ux58f")
+actions = Array[ExtResource("7_ownji")]([SubResource("Resource_0u7th")])
+
+[sub_resource type="GDScript" id="GDScript_tpxpg"]
+script/source = "extends XRController3D
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+	$Aim.visible = is_button_pressed(\"point_thumb_up\")
+"
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_oevpt"]
+radius = 0.01
+height = 0.05
+radial_segments = 6
+rings = 3
+
+[sub_resource type="GDScript" id="GDScript_xq4qg"]
+script/source = "extends XRController3D
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+	$Aim.visible = is_button_pressed(\"point_thumb_up\")
+"
 
 [node name="Demo" type="Node3D"]
 script = ExtResource("1_3t01i")
@@ -45,6 +83,11 @@ show_when_tracked = true
 [node name="LeftHandPose" parent="XROrigin3D/LeftTrackedHand" instance=ExtResource("3_sea3p")]
 hand_pose_set = ExtResource("4_aw253")
 
+[node name="LeftHandPoseController" parent="XROrigin3D/LeftTrackedHand/LeftHandPose" instance=ExtResource("5_0abgo")]
+tracker_name = "/user/hand_pose_controller/left"
+pose_type = 1
+action_set = SubResource("Resource_0mgap")
+
 [node name="RightTrackedHand" type="XRNode3D" parent="XROrigin3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 1, 0)
 tracker = &"/user/hand_tracker/right"
@@ -58,6 +101,29 @@ hand_tracker = &"/user/hand_tracker/right"
 [node name="RightHandPose" parent="XROrigin3D/RightTrackedHand" instance=ExtResource("3_sea3p")]
 hand_pose_set = ExtResource("4_aw253")
 tracker_name = "/user/hand_tracker/right"
+
+[node name="RightHandPoseController" parent="XROrigin3D/RightTrackedHand/RightHandPose" instance=ExtResource("5_0abgo")]
+tracker_name = "/user/hand_pose_controller/right"
+pose_type = 1
+action_set = SubResource("Resource_0mgap")
+
+[node name="LeftPoseController" type="XRController3D" parent="XROrigin3D"]
+tracker = &"/user/hand_pose_controller/left"
+script = SubResource("GDScript_tpxpg")
+
+[node name="Aim" type="MeshInstance3D" parent="XROrigin3D/LeftPoseController"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_oevpt")
+
+[node name="RightPoseController" type="XRController3D" parent="XROrigin3D"]
+tracker = &"/user/hand_pose_controller/right"
+script = SubResource("GDScript_xq4qg")
+
+[node name="Aim" type="MeshInstance3D" parent="XROrigin3D/RightPoseController"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_oevpt")
 
 [node name="LeftHandLabel" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2, -3)
