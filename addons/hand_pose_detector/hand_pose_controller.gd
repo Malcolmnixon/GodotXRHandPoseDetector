@@ -29,8 +29,8 @@ const _POSE_TRANSFORMS_LEFT : Array[Transform3D] = [
 
 	# Aim pose - see OpenXR specification
 	Transform3D(
-		Basis(Quaternion(0.4304593, -0.5609855, 0.4304593, 0.5609855)),
-		Vector3(-0.03, 0.08, 0.025)),
+		Basis(Quaternion(0.5, -0.5, 0.5, 0.5)),
+		Vector3(-0.05, 0.11, 0.035)),
 
 	# Grip pose - see OpenXR specification
 	Transform3D(
@@ -47,8 +47,8 @@ const _POSE_TRANSFORMS_RIGHT : Array[Transform3D] = [
 
 	# Aim pose - see OpenXR specification
 	Transform3D(
-		Basis(Quaternion(0.4304593, 0.5609855, -0.4304593, 0.5609855)),
-		Vector3(0.03, 0.08, 0.025)),
+		Basis(Quaternion(0.5, 0.5, -0.5, 0.5)),
+		Vector3(0.05, 0.11, 0.035)),
 
 	# Grip pose - see OpenXR specification
 	Transform3D(
