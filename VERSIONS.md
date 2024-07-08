@@ -1,4 +1,7 @@
-# 1.2.0 (in progress)
+# 1.3.0 (in progress)
+- Fine-tune aim pose
+
+# 1.2.0
 - Added hand pose controller capable of generating XR input actions
 - Added debounce hold and release times for poses
 - Added controller pose type [skeleton, aim, grab]
