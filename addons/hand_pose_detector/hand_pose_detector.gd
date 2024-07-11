@@ -47,21 +47,23 @@ func _validate_property(property: Dictionary) -> void:
 		property.hint_string = "/user/hand_tracker/left,/user/hand_tracker/right"
 
 
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	# Listen for tracker changes
+	XRServer.tracker_added.connect(_on_tracker_changed)
+	XRServer.tracker_updated.connect(_on_tracker_changed)
+	XRServer.tracker_removed.connect(_on_tracker_changed)
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	# Skip when running in the engine
 	if Engine.is_editor_hint():
 		return
 
-	# Skip if no hand pose set
-	if not hand_pose_set:
+	# Skip if no tracker or hand pose set
+	if not tracker or not hand_pose_set:
 		return
-
-	# Try to find the requested tracker
-	if not tracker or tracker.name != tracker_name:
-		tracker = XRServer.get_tracker(tracker_name) as XRHandTracker
-		if not tracker:
-			return
 
 	# Save the active pose before updates (to report changes)
 	var active_pos := _current_pose
@@ -112,3 +114,9 @@ func _process(delta: float) -> void:
 		active_pos = _current_pose
 		if active_pos:
 			pose_started.emit(active_pos.pose_name)
+
+
+# If the tracker changed then try to get the updated handle
+func _on_tracker_changed(p_name : StringName, _type) -> void:
+	if p_name == tracker_name:
+		tracker = XRServer.get_tracker(tracker_name)
