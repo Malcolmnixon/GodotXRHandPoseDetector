@@ -65,6 +65,14 @@ func _process(delta: float) -> void:
 	if not tracker or not hand_pose_set:
 		return
 
+	# If the palm is not tracked then skip pose detection. Any current pose will
+	# remain active until we see the hand again.
+	var flags := tracker.get_hand_joint_flags(XRHandTracker.HAND_JOINT_PALM)
+	if (flags & XRHandTracker.HAND_JOINT_FLAG_POSITION_TRACKED) == 0:
+		return;
+	if (flags & XRHandTracker.HAND_JOINT_FLAG_ORIENTATION_TRACKED) == 0:
+		return;
+
 	# Save the active pose before updates (to report changes)
 	var active_pos := _current_pose
 
