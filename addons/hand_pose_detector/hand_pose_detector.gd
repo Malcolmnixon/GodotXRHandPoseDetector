@@ -78,9 +78,7 @@ func _process(delta: float) -> void:
 
 	# Find the pose
 	_current_data.update(tracker)
-	var pose_match := hand_pose_set.find_pose(_current_data)
-	var pose : HandPose = pose_match.pose
-	var fitness : float = pose_match.fitness
+	var pose := hand_pose_set.find_pose(_current_data)
 
 	# Manage current pose
 	if _current_pose:
