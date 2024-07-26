@@ -1,4 +1,7 @@
-# 1.3.0 (in progress)
+# 2.0.0 (in progress)
+- Rename Action-Set to Action-Map to better match OpenXR naming
+
+# 1.3.0
 - Fine-tune aim pose
 
 # 1.2.0
