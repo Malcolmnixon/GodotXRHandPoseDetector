@@ -1,9 +1,8 @@
-[gd_scene load_steps=25 format=4 uid="uid://y0j46ct8rv7f"]
+[gd_scene load_steps=24 format=4 uid="uid://y0j46ct8rv7f"]
 
 [ext_resource type="Script" path="res://demo.gd" id="1_3t01i"]
 [ext_resource type="PackedScene" uid="uid://cjcehqrfoxav3" path="res://addons/hand_pose_detector/hands/LeftHandHumanoid.gltf" id="2_qj6xm"]
 [ext_resource type="Texture2D" uid="uid://jmog4gftnc6" path="res://addons/hand_pose_detector/hands/hand.png" id="3_nkppy"]
-[ext_resource type="PackedScene" uid="uid://df5hynbooj1uj" path="res://addons/hand_pose_detector/hand_pose_detector.tscn" id="3_sea3p"]
 [ext_resource type="Resource" uid="uid://ckjd0xa2a240p" path="res://addons/hand_pose_detector/poses/standard_pose_set.tres" id="4_aw253"]
 [ext_resource type="PackedScene" uid="uid://dabmoo0spa6vg" path="res://addons/hand_pose_detector/hands/RightHandHumanoid.gltf" id="4_uvuof"]
 [ext_resource type="PackedScene" uid="uid://bh8isvqs258cp" path="res://addons/hand_pose_detector/hand_pose_controller.tscn" id="5_0abgo"]
@@ -128,15 +127,15 @@ bind/24/name = &"LeftLittleTip"
 bind/24/bone = -1
 bind/24/pose = Transform3D(-0.0340048, -0.961705, 0.271969, 0.359157, -0.265706, -0.894655, 0.932658, 0.0672569, 0.354438, -0.0260868, -0.135553, 0.0427634)
 
-[sub_resource type="Resource" id="Resource_vo1wg"]
+[sub_resource type="Resource" id="Resource_pugay"]
 script = ExtResource("7_ownji")
 pose = ExtResource("8_pcf64")
 action_type = 0
 action_name = "point_thumb_up"
 
-[sub_resource type="Resource" id="Resource_xdjma"]
+[sub_resource type="Resource" id="Resource_gbdrn"]
 script = ExtResource("9_ux58f")
-actions = Array[ExtResource("7_ownji")]([SubResource("Resource_vo1wg")])
+actions = Array[ExtResource("7_ownji")]([SubResource("Resource_pugay")])
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_073d2"]
 resource_name = "Hand"
@@ -397,13 +396,9 @@ skin = SubResource("Skin_jphv2")
 
 [node name="XRHandModifier3D" type="XRHandModifier3D" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D" index="1"]
 
-[node name="LeftHandPose" parent="XROrigin3D/LeftTrackedHand" instance=ExtResource("3_sea3p")]
+[node name="LeftHandPose" parent="XROrigin3D/LeftTrackedHand" instance=ExtResource("5_0abgo")]
+controller_action_map = SubResource("Resource_gbdrn")
 hand_pose_set = ExtResource("4_aw253")
-
-[node name="LeftHandPoseController" parent="XROrigin3D/LeftTrackedHand/LeftHandPose" instance=ExtResource("5_0abgo")]
-tracker_name = "/user/hand_pose_controller/left"
-pose_type = 1
-action_map = SubResource("Resource_xdjma")
 
 [node name="RightTrackedHand" type="XRNode3D" parent="XROrigin3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 1, 0)
@@ -521,14 +516,11 @@ skin = SubResource("Skin_ivlc3")
 [node name="XRHandModifier3D" type="XRHandModifier3D" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid/RightHandHumanoid/Skeleton3D" index="1"]
 hand_tracker = &"/user/hand_tracker/right"
 
-[node name="RightHandPose" parent="XROrigin3D/RightTrackedHand" instance=ExtResource("3_sea3p")]
+[node name="RightHandPose" parent="XROrigin3D/RightTrackedHand" instance=ExtResource("5_0abgo")]
+controller_tracker_name = "/user/hand_pose_controller/right"
+controller_action_map = SubResource("Resource_gbdrn")
+hand_tracker_name = "/user/hand_tracker/right"
 hand_pose_set = ExtResource("4_aw253")
-tracker_name = "/user/hand_tracker/right"
-
-[node name="RightHandPoseController" parent="XROrigin3D/RightTrackedHand/RightHandPose" instance=ExtResource("5_0abgo")]
-tracker_name = "/user/hand_pose_controller/right"
-pose_type = 1
-action_map = SubResource("Resource_xdjma")
 
 [node name="LeftPoseController" type="XRController3D" parent="XROrigin3D"]
 tracker = &"/user/hand_pose_controller/left"

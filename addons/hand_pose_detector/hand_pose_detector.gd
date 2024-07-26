@@ -15,14 +15,18 @@ signal pose_started(p_name : String)
 signal pose_ended(p_name : String)
 
 
+@export_group("Hand", "hand_")
+
+## Name of the hand pose tracker
+@export var hand_tracker_name : String = "/user/hand_tracker/left"
+
 ## Current hand pose set
 @export var hand_pose_set : HandPoseSet
 
-## Name of the hand pose tracker
-@export var tracker_name : String = "/user/hand_tracker/left"
 
 ## Current hand tracker
-var tracker : XRHandTracker
+var hand_tracker : XRHandTracker
+
 
 # Current hand pose data
 var _current_data : HandPoseData = HandPoseData.new()
@@ -42,7 +46,7 @@ var _new_hold : float = 0.0
 
 # Customize the properties
 func _validate_property(property: Dictionary) -> void:
-	if property.name == "tracker_name":
+	if property.name == "hand_tracker_name":
 		property.hint = PROPERTY_HINT_ENUM_SUGGESTION
 		property.hint_string = "/user/hand_tracker/left,/user/hand_tracker/right"
 
@@ -62,12 +66,12 @@ func _process(delta: float) -> void:
 		return
 
 	# Skip if no tracker or hand pose set
-	if not tracker or not hand_pose_set:
+	if not hand_tracker or not hand_pose_set:
 		return
 
 	# If the palm is not tracked then skip pose detection. Any current pose will
 	# remain active until we see the hand again.
-	var flags := tracker.get_hand_joint_flags(XRHandTracker.HAND_JOINT_PALM)
+	var flags := hand_tracker.get_hand_joint_flags(XRHandTracker.HAND_JOINT_PALM)
 	if (flags & XRHandTracker.HAND_JOINT_FLAG_POSITION_TRACKED) == 0:
 		return;
 	if (flags & XRHandTracker.HAND_JOINT_FLAG_ORIENTATION_TRACKED) == 0:
@@ -77,7 +81,7 @@ func _process(delta: float) -> void:
 	var active_pos := _current_pose
 
 	# Find the pose
-	_current_data.update(tracker)
+	_current_data.update(hand_tracker)
 	var pose := hand_pose_set.find_pose(_current_data)
 
 	# Manage current pose
@@ -122,7 +126,19 @@ func _process(delta: float) -> void:
 			pose_started.emit(active_pos.pose_name)
 
 
+# Get configuration warnings
+func _get_configuration_warnings() -> PackedStringArray:
+	var warnings := PackedStringArray()
+
+	# Verify hand tracker name is set
+	if hand_tracker_name == "":
+		warnings.append("Hand tracker name not set")
+
+	# Return the warnings
+	return warnings
+
+
 # If the tracker changed then try to get the updated handle
 func _on_tracker_changed(p_name : StringName, _type) -> void:
-	if p_name == tracker_name:
-		tracker = XRServer.get_tracker(tracker_name)
+	if p_name == hand_tracker_name:
+		hand_tracker = XRServer.get_tracker(hand_tracker_name)

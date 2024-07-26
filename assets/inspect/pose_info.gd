@@ -4,7 +4,7 @@ extends Label3D
 
 
 ## Hand pose to diagnose
-@export var pose : HandPose 
+@export var pose : HandPose
 
 ## Name of the hand pose tracker
 @export var tracker_name : String = "/user/hand_tracker/left"
