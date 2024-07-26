@@ -4,4 +4,3 @@
 
 [node name="HandPoseDetector" type="Node"]
 script = ExtResource("1_rrxmu")
-tracker_name = "/user/hand_tracker/left"

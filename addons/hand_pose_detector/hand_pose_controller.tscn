@@ -4,5 +4,4 @@
 
 [node name="HandPoseController" type="Node"]
 script = ExtResource("1_peu0g")
-tracker_name = null
-pose_name = null
+controller_pose_type = 1
