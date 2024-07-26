@@ -1,10 +1,10 @@
-class_name HandPoseActionSet
+class_name HandPoseActionMap
 extends Resource
 
 
-## Hand Pose Action Set Resource
+## Hand Pose Action Map Resource
 ##
-## This resource defines a set of HandPoseAction used to associate hand poses
+## This resource defines a map of HandPoseAction used to associate hand poses
 ## with XR Input Actions.
 
 

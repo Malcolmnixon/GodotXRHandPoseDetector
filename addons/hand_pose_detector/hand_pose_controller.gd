@@ -64,7 +64,7 @@ const _POSE_TRANSFORMS_RIGHT : Array[Transform3D] = [
 @export var pose_type : PoseType = PoseType.SKELETON
 
 ## Hand poses generating boolean values
-@export var action_set : HandPoseActionSet
+@export var action_map : HandPoseActionMap
 
 
 ## Hand Pose Detector
@@ -159,12 +159,12 @@ func _get_configuration_warnings() -> PackedStringArray:
 
 # Handle start of pose
 func _pose_started(p_name : String) -> void:
-	# Skip if no tracker or action set
-	if not tracker or not action_set:
+	# Skip if no tracker or action map
+	if not tracker or not action_map:
 		return
 
 	# Find the action
-	var action := action_set.get_action(p_name)
+	var action := action_map.get_action(p_name)
 	if not action:
 		return
 
@@ -177,12 +177,12 @@ func _pose_started(p_name : String) -> void:
 
 # Handle end of pose
 func _pose_ended(p_name : String) -> void:
-	# Skip if no tracker or action set
-	if not tracker or not action_set:
+	# Skip if no tracker or action map
+	if not tracker or not action_map:
 		return
 
 	# Find the action
-	var action := action_set.get_action(p_name)
+	var action := action_map.get_action(p_name)
 	if not action:
 		return
 
