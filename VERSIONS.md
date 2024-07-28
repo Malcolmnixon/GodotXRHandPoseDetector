@@ -1,6 +1,7 @@
 # 2.0.0 (in progress)
 - Rename Action-Set to Action-Map to better match OpenXR naming
 - Modify HandPoseController to extend from HandPoseDetector (breaking change)
+- Minor adjustment to point-thumbs-up to make it work better for UI framing
 
 # 1.3.0
 - Fine-tune aim pose

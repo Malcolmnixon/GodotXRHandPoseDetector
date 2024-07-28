@@ -47,8 +47,8 @@ max = 0.0
 script = ExtResource("2_0x328")
 type = 0
 min = 0.0
-from = 40.0
-to = 20.0
+from = 50.0
+to = 30.0
 max = 0.0
 
 [sub_resource type="Resource" id="Resource_iey1r"]
