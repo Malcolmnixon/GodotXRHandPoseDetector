@@ -6,7 +6,7 @@
 ![GitHub](https://img.shields.io/github/license/Malcolmnixon/GodotXRHandPoseDetector?style=plastic)
 
 This repository contains a hand pose detector for Godot that detects poses on XRHandTracker sources.
-![Demo Screen Shot](/docs/demo_screen_shot.png)
+[<img src="docs/demo_screen_shot.png">](https://youtu.be/QEtiVnjxkGMv "Godot XR Hand Pose Detector 2")
 
 
 ## Versions
