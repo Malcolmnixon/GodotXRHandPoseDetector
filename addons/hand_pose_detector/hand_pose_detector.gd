@@ -53,6 +53,8 @@ func _validate_property(property: Dictionary) -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	hand_tracker = XRServer.get_tracker(hand_tracker_name)
+
 	# Listen for tracker changes
 	XRServer.tracker_added.connect(_on_tracker_changed)
 	XRServer.tracker_updated.connect(_on_tracker_changed)
