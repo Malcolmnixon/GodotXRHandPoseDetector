@@ -214,4 +214,4 @@ static func _angle_to(from: Vector3, to: Vector3, axis : Vector3) -> float:
 	var to2 = to.slide(axis).normalized()
 
 	# Calculate the angle in degrees
-	return rad_to_deg(from2.signed_angle_to(to2, axis))
+	return abs(rad_to_deg(from2.signed_angle_to(to2, axis)))
